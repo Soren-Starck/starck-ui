@@ -25,11 +25,12 @@ type LiquidGlassNavbarProps = {
   version?: string
   logoSrc?: string
   logoAlt?: string
-  links?: NavLink[]
+  links?: readonly NavLink[]
   ctaHref?: string
   ctaLabel?: string
   fixedWidth?: boolean
   contained?: boolean
+  scrollContainerRef?: React.RefObject<HTMLElement | null>
   className?: string
 }
 
@@ -39,19 +40,31 @@ const defaultLinks: NavLink[] = [
   { href: "#faq", label: "FAQ" },
 ]
 
-function BrandLogo({ src, alt }: { src?: string; alt: string }) {
+function BrandLogo({
+  src,
+  alt,
+  className,
+}: {
+  src?: string
+  alt: string
+  className: string
+}) {
   if (src) {
     return (
       // This registry component is framework-neutral, so Next Image is not used.
       // eslint-disable-next-line @next/next/no-img-element
-      <img src={src} alt={alt} className="size-8 rounded-[9px] object-cover" />
+      <img
+        src={src}
+        alt={alt}
+        className={`${className} rounded-[9px] object-cover`}
+      />
     )
   }
 
   return (
     <span
       aria-hidden="true"
-      className="flex size-8 items-center justify-center rounded-[9px] bg-zinc-950 text-xs font-semibold text-white dark:bg-white dark:text-zinc-950"
+      className={`flex ${className} items-center justify-center rounded-[9px] bg-zinc-950 text-xs font-semibold text-white dark:bg-white dark:text-zinc-950`}
     >
       S
     </span>
@@ -68,16 +81,18 @@ function LiquidGlassNavbar({
   ctaLabel = "Get SessionWatcher",
   fixedWidth = false,
   contained = false,
+  scrollContainerRef,
   className,
 }: LiquidGlassNavbarProps) {
   const prefersReducedMotion = useReducedMotion()
-  const { scrollY } = useScroll()
+  const { scrollY } = useScroll({ container: scrollContainerRef })
   const animatedWidth = useTransform(
     scrollY,
     [0, 400],
     [fixedWidth ? "100%" : "50%", "120%"]
   )
   const staticWidth = fixedWidth ? "100%" : "85%"
+  const containedWidth = useTransform(scrollY, [0, 320], ["92%", "100%"])
   const mobileNav = React.useRef<HTMLElement>(null)
   const desktopNav = React.useRef<HTMLElement>(null)
 
@@ -114,7 +129,7 @@ function LiquidGlassNavbar({
   }, [])
 
   const positioning = contained
-    ? "absolute top-4 inset-x-0"
+    ? "sticky top-4 inset-x-0 h-0"
     : "fixed top-4 inset-x-0"
 
   return (
@@ -135,7 +150,11 @@ function LiquidGlassNavbar({
       >
         <div className="flex items-center justify-between">
           <a href="#" className="flex shrink-0 items-center gap-1.5">
-            <BrandLogo src={logoSrc} alt={logoAlt ?? brand} />
+            <BrandLogo
+              src={logoSrc}
+              alt={logoAlt ?? brand}
+              className="size-6"
+            />
             <span className="relative text-lg leading-6 font-bold tracking-tighter whitespace-nowrap">
               {brand}
               {version ? (
@@ -162,7 +181,9 @@ function LiquidGlassNavbar({
         className="hidden max-w-[1200px] rounded-full px-3 py-3 pl-4 backdrop-blur-md sm:block"
         style={{
           width: contained
-            ? "92%"
+            ? prefersReducedMotion
+              ? "100%"
+              : containedWidth
             : prefersReducedMotion
               ? staticWidth
               : animatedWidth,
@@ -170,7 +191,11 @@ function LiquidGlassNavbar({
       >
         <div className="relative flex items-center justify-between">
           <a href="#" className="flex shrink-0 items-center gap-2">
-            <BrandLogo src={logoSrc} alt={logoAlt ?? brand} />
+            <BrandLogo
+              src={logoSrc}
+              alt={logoAlt ?? brand}
+              className="size-8"
+            />
             <span className="relative text-2xl leading-8 font-bold tracking-tighter whitespace-nowrap">
               {brand}
               {version ? (

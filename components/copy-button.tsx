@@ -14,7 +14,13 @@ function CopyButton({ value }: { value: string }) {
   }
 
   return (
-    <Button variant="ghost" size="xs" onClick={copy} aria-live="polite">
+    <Button
+      variant="ghost"
+      size="xs"
+      className="cursor-pointer"
+      onClick={copy}
+      aria-live="polite"
+    >
       {copied ? "Copied" : "Copy"}
     </Button>
   )

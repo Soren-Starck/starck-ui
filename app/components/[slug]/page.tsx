@@ -3,6 +3,7 @@ import path from "node:path"
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
+import { ComponentActions } from "@/components/component-actions"
 import { ComponentPreview } from "@/components/component-preview"
 import { CopyButton } from "@/components/copy-button"
 import { InstallCommand } from "@/components/install-command"
@@ -49,15 +50,25 @@ export default async function ComponentPage({ params }: Props) {
 
   return (
     <main className="mx-auto max-w-5xl px-5 py-12 sm:px-8 sm:py-16">
-      <p className="text-xs font-medium tracking-[0.08em] text-muted-foreground uppercase">
-        Component
-      </p>
-      <h1 className="mt-3 text-4xl font-semibold tracking-[-0.035em]">
-        {component.title}
-      </h1>
-      <p className="mt-4 max-w-2xl text-base leading-7 text-muted-foreground">
-        {component.description}
-      </p>
+      <div className="flex flex-col gap-7 sm:flex-row sm:items-start sm:justify-between">
+        <div>
+          <p className="text-xs font-medium tracking-[0.08em] text-muted-foreground uppercase">
+            Component
+          </p>
+          <h1 className="mt-3 text-4xl font-semibold tracking-[-0.035em]">
+            {component.title}
+          </h1>
+          <p className="mt-4 max-w-2xl text-base leading-7 text-muted-foreground">
+            {component.description}
+          </p>
+        </div>
+        <ComponentActions
+          slug={component.slug}
+          title={component.title}
+          description={component.description}
+          usage={component.usage}
+        />
+      </div>
 
       <div className="mt-10">
         <Tabs defaultValue="preview">

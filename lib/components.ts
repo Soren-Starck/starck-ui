@@ -1,3 +1,5 @@
+import { blueCtaButtonUsage, liquidGlassNavbarUsage } from "@/lib/examples"
+
 const components = [
   {
     slug: "liquid-glass-navbar",
@@ -8,12 +10,7 @@ const components = [
       "registry/default/liquid-glass-navbar.tsx",
       "registry/default/liquid-glass.ts",
     ],
-    usage: `<LiquidGlassNavbar
-  brand="SessionWatcher"
-  version="v7.3.0"
-  logoSrc="/sessionwatcher-logo.png"
-  ctaHref="#pricing"
-/>`,
+    usage: liquidGlassNavbarUsage(),
   },
   {
     slug: "blue-cta-button",
@@ -21,7 +18,7 @@ const components = [
     description:
       "SessionWatcher's dimensional blue CTA: sampled gradient, specular rim, soft glow, and a quick press state.",
     sourceFiles: ["registry/default/blue-cta-button.tsx"],
-    usage: `<BlueCtaButton onClick={() => console.log("Ship it")}>\n  Get SessionWatcher\n</BlueCtaButton>`,
+    usage: blueCtaButtonUsage(),
   },
 ] as const
 

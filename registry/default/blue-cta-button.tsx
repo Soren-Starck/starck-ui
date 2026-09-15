@@ -28,6 +28,7 @@ function BlueCtaButton({
   children = "Get SessionWatcher",
   className,
   icon,
+  style,
   type = "button",
   ...props
 }: BlueCtaButtonProps) {
@@ -37,7 +38,7 @@ function BlueCtaButton({
       className={[blueCtaClassName, className].filter(Boolean).join(" ")}
       style={{
         ...blueCtaStyle,
-        ...props.style,
+        ...style,
       }}
       {...props}
     >
