@@ -62,7 +62,17 @@ ${usage}
           icon={copied === "command" ? Tick02Icon : Copy01Icon}
           strokeWidth={2}
         />
-        {copied === "command" ? "Command copied" : "Add component"}
+        <span className="grid">
+          <span
+            aria-hidden="true"
+            className="invisible col-start-1 row-start-1"
+          >
+            Add component
+          </span>
+          <span className="col-start-1 row-start-1">
+            {copied === "command" ? "Copied" : "Add component"}
+          </span>
+        </span>
       </Button>
       <Button
         variant="outline"
@@ -74,7 +84,17 @@ ${usage}
           icon={copied === "prompt" ? Tick02Icon : AiSparklesIcon}
           strokeWidth={2}
         />
-        {copied === "prompt" ? "Prompt copied" : "Implement with AI"}
+        <span className="grid">
+          <span
+            aria-hidden="true"
+            className="invisible col-start-1 row-start-1"
+          >
+            Implement with AI
+          </span>
+          <span className="col-start-1 row-start-1">
+            {copied === "prompt" ? "Copied" : "Implement with AI"}
+          </span>
+        </span>
       </Button>
     </div>
   )
