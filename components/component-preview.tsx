@@ -7,6 +7,11 @@ import { blueCtaButtonExample, liquidGlassNavbarExample } from "@/lib/examples"
 import { BlueCtaButton } from "@/registry/default/blue-cta-button"
 import { LiquidGlassNavbar } from "@/registry/default/liquid-glass-navbar"
 
+// Free stock photographs from Unsplash. Source pages:
+// https://unsplash.com/photos/-Ksr263JEa8
+// https://unsplash.com/photos/5aXEo-hGwU0
+// https://unsplash.com/photos/lEzMTXWjnFo
+
 function ComponentPreview({ slug }: { slug: string }) {
   if (slug === "blue-cta-button") {
     return (
@@ -43,42 +48,42 @@ function LiquidGlassNavbarPreview() {
           <div className="relative mx-auto max-w-2xl text-center">
             <p className="text-sm text-muted-foreground">Scroll this preview</p>
             <p className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
-              Real interface. Real refraction.
+              Watch detail bend through glass.
             </p>
           </div>
 
           <div className="relative mx-auto mt-10 max-w-4xl">
             <figure className="overflow-hidden rounded-3xl border border-white/20 bg-sky-500 shadow-[0_24px_80px_-32px_rgba(37,99,235,0.55)]">
               <Image
-                src="/preview/sessionwatcher-overview.webp"
-                alt="SessionWatcher interface on a blue macOS desktop"
-                width={900}
-                height={900}
+                src="/preview/glass-architecture.webp"
+                alt="Colorful glass architecture"
+                width={1400}
+                height={1000}
                 priority
                 sizes="(min-width: 768px) 800px, 90vw"
-                className="h-[360px] w-full object-cover object-[68%_28%] sm:h-[430px]"
+                className="h-[360px] w-full object-cover sm:h-[430px]"
               />
             </figure>
 
             <div className="mt-6 grid gap-6 sm:grid-cols-2">
               <figure className="overflow-hidden rounded-3xl border border-white/20 bg-sky-500 shadow-[0_24px_70px_-36px_rgba(37,99,235,0.5)]">
                 <Image
-                  src="/preview/sessionwatcher-codex.webp"
-                  alt="SessionWatcher showing Codex usage"
+                  src="/preview/flowers.webp"
+                  alt="Colorful flowers in a garden"
                   width={900}
                   height={900}
                   sizes="(min-width: 768px) 380px, 90vw"
-                  className="aspect-square size-full object-cover object-[70%_30%]"
+                  className="aspect-square size-full object-cover"
                 />
               </figure>
               <figure className="overflow-hidden rounded-3xl border border-white/20 bg-sky-500 shadow-[0_24px_70px_-36px_rgba(124,58,237,0.45)]">
                 <Image
-                  src="/preview/sessionwatcher-claude.webp"
-                  alt="SessionWatcher showing Claude usage"
+                  src="/preview/colorful-windows.webp"
+                  alt="A geometric facade with colorful windows"
                   width={900}
                   height={900}
                   sizes="(min-width: 768px) 380px, 90vw"
-                  className="aspect-square size-full object-cover object-[70%_30%]"
+                  className="aspect-square size-full object-cover"
                 />
               </figure>
             </div>

@@ -6,7 +6,11 @@
   "scripts": {
     "dev": "next dev",
     "build": "pnpm registry:build && next build",
+    "deploy": "pnpm dlx vercel@59.17.0 --prod --yes",
     "registry:build": "shadcn build",
+    "provenance:update": "node scripts/update-component-provenance.mjs",
+    "provenance:check": "node scripts/update-component-provenance.mjs --check",
+    "predeploy": "pnpm provenance:check && pnpm typecheck && pnpm lint && pnpm build && node scripts/assert-clean-worktree.mjs",
     "start": "next start",
     "lint": "eslint",
     "format": "prettier --write \"**/*.{ts,tsx}\"",

@@ -9,6 +9,7 @@ import { CopyButton } from "@/components/copy-button"
 import { InstallCommand } from "@/components/install-command"
 import { Separator } from "@/components/ui/separator"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { getComponentProvenance } from "@/lib/component-provenance.generated"
 import { components, getComponent } from "@/lib/components"
 
 type Props = {
@@ -32,6 +33,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function ComponentPage({ params }: Props) {
   const component = getComponent((await params).slug)
   if (!component) notFound()
+  const provenance = getComponentProvenance(component.slug)
 
   const sources = await Promise.all(
     component.sourceFiles.map(async (sourcePath) => ({
@@ -61,6 +63,28 @@ export default async function ComponentPage({ params }: Props) {
           <p className="mt-4 max-w-2xl text-base leading-7 text-muted-foreground">
             {component.description}
           </p>
+          {provenance.length > 0 ? (
+            <div className="mt-5 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
+              <span className="text-muted-foreground">Used in</span>
+              {provenance.map((project, index) => (
+                <span key={project.href} className="inline-flex items-center gap-2">
+                  {index > 0 ? (
+                    <span aria-hidden="true" className="text-border">
+                      ·
+                    </span>
+                  ) : null}
+                  <a
+                    href={project.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="font-medium underline-offset-4 hover:underline"
+                  >
+                    {project.name} ↗
+                  </a>
+                </span>
+              ))}
+            </div>
+          ) : null}
         </div>
         <ComponentActions
           slug={component.slug}

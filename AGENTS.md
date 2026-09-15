@@ -22,3 +22,6 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - The documentation app uses raw shadcn components from the configured preset.
   STARCK UI registry components remain source-owned and independent of the docs
   shell.
+- Before every production deployment, run `pnpm provenance:update`, review and
+  commit any generated provenance change, then deploy only through `pnpm deploy`.
+  The deploy lifecycle blocks stale provenance and any worktree drift.
