@@ -1,6 +1,7 @@
 import { readFile } from "node:fs/promises"
 import path from "node:path"
 import type { Metadata } from "next"
+import Image from "next/image"
 import { notFound } from "next/navigation"
 
 import { ComponentActions } from "@/components/component-actions"
@@ -77,9 +78,18 @@ export default async function ComponentPage({ params }: Props) {
                     href={project.href}
                     target="_blank"
                     rel="noreferrer"
-                    className="font-medium underline-offset-4 hover:underline"
+                    className="inline-flex items-center gap-1.5 font-medium underline-offset-4 hover:underline"
                   >
-                    {project.name} ↗
+                    {project.iconSrc ? (
+                      <Image
+                        src={project.iconSrc}
+                        alt=""
+                        width={16}
+                        height={16}
+                        className="size-4 rounded-[4px]"
+                      />
+                    ) : null}
+                    <span>{project.name} ↗</span>
                   </a>
                 </span>
               ))}

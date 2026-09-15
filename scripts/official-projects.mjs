@@ -3,12 +3,14 @@ export const officialProjects = [
     id: "sessionwatcher",
     name: "SessionWatcher",
     url: "https://sessionwatcher.com",
+    iconSrc: "/products/sessionwatcher.png",
     directories: ["session-watcher-website"],
   },
   {
     id: "moorline",
     name: "Moorline",
     url: "https://moorline.app",
+    iconSrc: "/products/moorline.png",
     directories: ["moorline-website"],
   },
   {

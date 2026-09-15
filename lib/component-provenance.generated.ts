@@ -3,6 +3,7 @@
 type ComponentProvenance = {
   name: string
   href: string
+  iconSrc?: string
   evidence: string
 }
 
@@ -11,11 +12,13 @@ const componentProvenance = {
     {
       "name": "SessionWatcher",
       "href": "https://sessionwatcher.com",
+      "iconSrc": "/products/sessionwatcher.png",
       "evidence": "session-watcher-website/components/HomeHeader.tsx"
     },
     {
       "name": "Moorline",
       "href": "https://moorline.app",
+      "iconSrc": "/products/moorline.png",
       "evidence": "moorline-website/src/components/marketing/MoorlineHeader.tsx"
     }
   ],
@@ -23,11 +26,13 @@ const componentProvenance = {
     {
       "name": "SessionWatcher",
       "href": "https://sessionwatcher.com",
+      "iconSrc": "/products/sessionwatcher.png",
       "evidence": "session-watcher-website/components/HomeHeader.tsx"
     },
     {
       "name": "Moorline",
       "href": "https://moorline.app",
+      "iconSrc": "/products/moorline.png",
       "evidence": "moorline-website/src/components/marketing/MoorlineHeader.tsx"
     }
   ]
