@@ -23,5 +23,6 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
   STARCK UI registry components remain source-owned and independent of the docs
   shell.
 - Before every production deployment, run `pnpm provenance:update`, review and
-  commit any generated provenance change, then deploy only through `pnpm deploy`.
+  commit any generated provenance change, then deploy only through
+  `pnpm run deploy`.
   The deploy lifecycle blocks stale provenance and any worktree drift.
