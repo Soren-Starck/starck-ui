@@ -21,5 +21,7 @@
   },
   "menuColor": "default",
   "menuAccent": "subtle",
-  "registries": {}
+  "registries": {
+    "@starck": "https://ui.starck.studio/r/{name}.json"
+  }
 }

@@ -1,21 +1,24 @@
-# Next.js template
+# STARCK UI
 
-This is a Next.js template with shadcn/ui.
+The components STARCK uses to ship software. This repository contains the
+documentation site and public shadcn registry served at
+[`ui.starck.studio`](https://ui.starck.studio).
 
-## Adding components
+## Development
 
-To add components to your app, run the following command:
-
-```bash
-npx shadcn@latest add button
+```sh
+pnpm install
+pnpm dev
 ```
 
-This will place the ui components in the `components` directory.
+## Registry
 
-## Using components
+Registry source lives in `registry/default`. Build the public item JSON after
+changing a component:
 
-To use the components in your app, import them as follows:
-
-```tsx
-import { Button } from "@/components/ui/button";
+```sh
+pnpm registry:build
 ```
+
+Components are added only after they have proved useful in a shipped STARCK
+product.
