@@ -1,15 +1,10 @@
 import Link from "next/link"
+import { ArrowRight01Icon } from "@hugeicons/core-free-icons"
+import { HugeiconsIcon } from "@hugeicons/react"
 
+import { StarckUiMark } from "@/components/starck-ui-mark"
 import { Separator } from "@/components/ui/separator"
 import { components } from "@/lib/components"
-
-function Mark() {
-  return (
-    <span className="flex size-8 items-center justify-center rounded-[9px] bg-foreground text-[11px] font-semibold tracking-[-0.04em] text-background">
-      S.
-    </span>
-  )
-}
 
 function DocsShell({ children }: { children: React.ReactNode }) {
   return (
@@ -17,7 +12,7 @@ function DocsShell({ children }: { children: React.ReactNode }) {
       <aside className="fixed inset-y-0 left-0 z-20 hidden w-64 border-r bg-sidebar md:flex md:flex-col">
         <div className="px-5 pt-6 pb-5">
           <Link href="/" className="flex items-center gap-3">
-            <Mark />
+            <StarckUiMark />
             <span>
               <span className="block text-sm font-semibold tracking-tight">
                 STARCK UI
@@ -59,9 +54,16 @@ function DocsShell({ children }: { children: React.ReactNode }) {
                 <Link
                   key={component.slug}
                   href={`/components/${component.slug}`}
-                  className="block rounded-lg px-3 py-2 text-muted-foreground transition-colors hover:bg-sidebar-accent hover:text-foreground"
+                  className="group flex items-center justify-between rounded-lg px-3 py-2 text-muted-foreground transition-colors hover:bg-sidebar-accent hover:text-foreground"
                 >
-                  {component.title}
+                  <span>{component.title}</span>
+                  <HugeiconsIcon
+                    icon={ArrowRight01Icon}
+                    size={14}
+                    strokeWidth={1.8}
+                    aria-hidden="true"
+                    className="opacity-40 transition-[opacity,transform] group-hover:translate-x-0.5 group-hover:opacity-100"
+                  />
                 </Link>
               ))}
             </div>
@@ -78,7 +80,7 @@ function DocsShell({ children }: { children: React.ReactNode }) {
         <header className="sticky top-0 z-10 border-b bg-background/90 backdrop-blur-xl md:hidden">
           <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-5 sm:px-8">
             <Link href="/" className="flex items-center gap-2">
-              <Mark />
+              <StarckUiMark />
               <span className="text-sm font-semibold">STARCK UI</span>
             </Link>
             <nav className="flex items-center gap-4 text-xs">
