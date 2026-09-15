@@ -85,7 +85,10 @@ function LiquidGlassNavbar({
   className,
 }: LiquidGlassNavbarProps) {
   const prefersReducedMotion = useReducedMotion()
-  const { scrollY } = useScroll({ container: scrollContainerRef })
+  const { scrollY } = useScroll({
+    container: scrollContainerRef,
+    layoutEffect: false,
+  })
   const animatedWidth = useTransform(
     scrollY,
     [0, 400],

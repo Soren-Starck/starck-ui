@@ -3,12 +3,13 @@
 import * as React from "react"
 
 import { Button } from "@/components/ui/button"
+import { copyToClipboard } from "@/lib/copy-to-clipboard"
 
 function CopyButton({ value }: { value: string }) {
   const [copied, setCopied] = React.useState(false)
 
   async function copy() {
-    await navigator.clipboard.writeText(value)
+    if (!(await copyToClipboard(value))) return
     setCopied(true)
     window.setTimeout(() => setCopied(false), 1400)
   }

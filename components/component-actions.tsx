@@ -9,6 +9,7 @@ import {
 import { HugeiconsIcon } from "@hugeicons/react"
 
 import { Button } from "@/components/ui/button"
+import { copyToClipboard } from "@/lib/copy-to-clipboard"
 
 type ComponentActionsProps = {
   slug: string
@@ -45,7 +46,7 @@ ${usage}
 6. Run the project's typecheck, lint, and build commands, then verify the component on desktop and mobile.`
 
   async function copy(value: string, type: "command" | "prompt") {
-    await navigator.clipboard.writeText(value)
+    if (!(await copyToClipboard(value))) return
     setCopied(type)
     window.setTimeout(() => setCopied(null), 1600)
   }
