@@ -140,7 +140,7 @@ function LiquidGlassNavbar({
       role="banner"
       className={[
         positioning,
-        "z-50 flex justify-center px-4 transition-opacity duration-300",
+        "z-50 flex items-start justify-center px-4 transition-opacity duration-300",
         className,
       ]
         .filter(Boolean)
