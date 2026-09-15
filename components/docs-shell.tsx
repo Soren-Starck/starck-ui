@@ -75,15 +75,12 @@ function DocsShell({ children }: { children: React.ReactNode }) {
       </aside>
 
       <div className="md:pl-64">
-        <header className="sticky top-0 z-10 border-b bg-background/90 backdrop-blur-xl">
+        <header className="sticky top-0 z-10 border-b bg-background/90 backdrop-blur-xl md:hidden">
           <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-5 sm:px-8">
-            <Link href="/" className="flex items-center gap-2 md:hidden">
+            <Link href="/" className="flex items-center gap-2">
               <Mark />
               <span className="text-sm font-semibold">STARCK UI</span>
             </Link>
-            <p className="hidden text-xs text-muted-foreground md:block">
-              The components we use to ship software.
-            </p>
             <nav className="flex items-center gap-4 text-xs">
               <Link
                 href="/components/liquid-glass-navbar"
