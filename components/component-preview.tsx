@@ -18,19 +18,24 @@ type ComponentPreviewProps = {
   slug: string
   blueCtaTone: BlueCtaTone
   navbarWidthBehavior: NavbarWidthBehavior
+  blueCtaControls?: React.ReactNode
 }
 
 function ComponentPreview({
   slug,
   blueCtaTone,
   navbarWidthBehavior,
+  blueCtaControls,
 }: ComponentPreviewProps) {
   if (slug === "blue-cta-button") {
     return (
-      <div className="preview-grid flex min-h-72 items-center justify-center overflow-hidden rounded-2xl border">
+      <div className="preview-grid relative flex min-h-72 items-center justify-center overflow-hidden rounded-2xl border">
         <BlueCtaButton tone={blueCtaTone}>
           {blueCtaButtonExample.label}
         </BlueCtaButton>
+        {blueCtaControls ? (
+          <div className="absolute bottom-4 left-4">{blueCtaControls}</div>
+        ) : null}
       </div>
     )
   }

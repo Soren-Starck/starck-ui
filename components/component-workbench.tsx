@@ -51,7 +51,7 @@ function ToneControl({
     <div
       role="group"
       aria-label="Button color"
-      className="inline-flex h-9 items-center gap-1 rounded-full bg-muted px-2"
+      className="inline-flex h-10 items-center gap-1 rounded-full border border-black/8 bg-background/88 px-2.5 shadow-[0_8px_28px_-12px_rgba(0,0,0,0.35)] backdrop-blur-xl"
     >
       <span className="mr-1 text-xs font-medium text-muted-foreground">
         Color
@@ -64,7 +64,7 @@ function ToneControl({
           aria-label={option.label}
           aria-pressed={value === option.value}
           onClick={() => onChange(option.value)}
-          className="grid size-6 cursor-pointer place-items-center rounded-full ring-offset-2 ring-offset-muted transition-transform hover:scale-110 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none aria-pressed:ring-2 aria-pressed:ring-foreground/50"
+          className="grid size-6 cursor-pointer place-items-center rounded-full ring-offset-2 ring-offset-background transition-transform hover:scale-110 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none aria-pressed:ring-2 aria-pressed:ring-foreground/50"
         >
           <span className={`size-3.5 rounded-full ${option.color}`} />
         </button>
@@ -127,14 +127,12 @@ function ComponentWorkbench({
                 <TabsTrigger value="preview">Preview</TabsTrigger>
                 <TabsTrigger value="source">Source</TabsTrigger>
               </TabsList>
-              {slug === "blue-cta-button" ? (
-                <ToneControl value={blueCtaTone} onChange={setBlueCtaTone} />
-              ) : (
+              {slug !== "blue-cta-button" ? (
                 <WidthBehaviorControl
                   value={navbarWidthBehavior}
                   onChange={setNavbarWidthBehavior}
                 />
-              )}
+              ) : null}
             </div>
             <ComponentActions
               slug={slug}
@@ -148,6 +146,11 @@ function ComponentWorkbench({
               slug={slug}
               blueCtaTone={blueCtaTone}
               navbarWidthBehavior={navbarWidthBehavior}
+              blueCtaControls={
+                slug === "blue-cta-button" ? (
+                  <ToneControl value={blueCtaTone} onChange={setBlueCtaTone} />
+                ) : undefined
+              }
             />
           </TabsContent>
           <TabsContent value="source" className="pt-3">
