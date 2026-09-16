@@ -207,6 +207,8 @@
 /* Catalogue cards own the grid so scaled previews never draw a second,
    smaller pattern on top of it. */
 .component-card-stage .preview-grid {
+  border-width: 0;
+  border-radius: 0;
   background-color: transparent;
   background-image: none;
 }
