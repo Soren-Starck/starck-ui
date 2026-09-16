@@ -65,6 +65,22 @@ function LiquidGlassNavbarPreview() {
               />
             </figure>
 
+            <section className="my-12 grid gap-5 text-left sm:my-16 sm:grid-cols-[0.7fr_1.3fr] sm:gap-10">
+              <p className="pt-1 text-xs font-medium tracking-[0.08em] text-muted-foreground uppercase">
+                Designed in motion
+              </p>
+              <div>
+                <h3 className="text-2xl font-semibold tracking-[-0.025em] sm:text-3xl">
+                  Clarity that changes with context.
+                </h3>
+                <p className="mt-4 max-w-xl text-base leading-7 text-muted-foreground">
+                  The surface picks up color, edges, and detail from whatever
+                  moves behind it. Navigation stays readable while the page
+                  remains visibly alive beneath the glass.
+                </p>
+              </div>
+            </section>
+
             <div className="mt-6 grid gap-6 sm:grid-cols-2">
               <figure className="overflow-hidden rounded-3xl border border-white/20 bg-sky-500 shadow-[0_24px_70px_-36px_rgba(37,99,235,0.5)]">
                 <Image
