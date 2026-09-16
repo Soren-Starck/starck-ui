@@ -1,11 +1,55 @@
 import * as React from "react"
 
+const blueCtaTones = ["blue", "violet", "emerald", "rose"] as const
+
+type BlueCtaTone = (typeof blueCtaTones)[number]
+
 type BlueCtaButtonProps = React.ComponentProps<"button"> & {
   icon?: React.ReactNode
+  tone?: BlueCtaTone
 }
 
+type BlueCtaToneStyle = React.CSSProperties & {
+  "--starck-blue-cta-start": string
+  "--starck-blue-cta-middle": string
+  "--starck-blue-cta-end": string
+  "--starck-blue-cta-dark": string
+  "--starck-blue-cta-glow": string
+}
+
+const blueCtaToneStyles = {
+  blue: {
+    "--starck-blue-cta-start": "#0b75e5",
+    "--starck-blue-cta-middle": "#0a73e4",
+    "--starck-blue-cta-end": "#0972e4",
+    "--starck-blue-cta-dark": "0 40 120",
+    "--starck-blue-cta-glow": "10 118 240",
+  },
+  violet: {
+    "--starck-blue-cta-start": "#8257f5",
+    "--starck-blue-cta-middle": "#7447eb",
+    "--starck-blue-cta-end": "#693cdd",
+    "--starck-blue-cta-dark": "58 24 140",
+    "--starck-blue-cta-glow": "124 58 237",
+  },
+  emerald: {
+    "--starck-blue-cta-start": "#10a978",
+    "--starck-blue-cta-middle": "#07966a",
+    "--starck-blue-cta-end": "#05855e",
+    "--starck-blue-cta-dark": "0 82 58",
+    "--starck-blue-cta-glow": "5 150 105",
+  },
+  rose: {
+    "--starck-blue-cta-start": "#f14f70",
+    "--starck-blue-cta-middle": "#e73f61",
+    "--starck-blue-cta-end": "#d93254",
+    "--starck-blue-cta-dark": "130 20 52",
+    "--starck-blue-cta-glow": "244 63 94",
+  },
+} satisfies Record<BlueCtaTone, BlueCtaToneStyle>
+
 const blueCtaClassName =
-  "starck-blue-cta inline-flex cursor-pointer items-center justify-center gap-1.5 rounded-full px-5 py-2 text-sm font-medium tracking-[-0.022em] whitespace-nowrap text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/60 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+  "starck-blue-cta inline-flex cursor-pointer items-center justify-center gap-1.5 rounded-full px-5 py-2 text-sm font-medium tracking-[-0.022em] whitespace-nowrap text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--starck-blue-cta-glow)/0.6)] focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
 
 const blueCtaStyle = {
   fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
@@ -29,6 +73,7 @@ function BlueCtaButton({
   className,
   icon,
   style,
+  tone = "blue",
   type = "button",
   ...props
 }: BlueCtaButtonProps) {
@@ -38,6 +83,7 @@ function BlueCtaButton({
       className={[blueCtaClassName, className].filter(Boolean).join(" ")}
       style={{
         ...blueCtaStyle,
+        ...blueCtaToneStyles[tone],
         ...style,
       }}
       {...props}
@@ -48,5 +94,11 @@ function BlueCtaButton({
   )
 }
 
-export { AppleMark, BlueCtaButton, blueCtaClassName, blueCtaStyle }
-export type { BlueCtaButtonProps }
+export {
+  AppleMark,
+  BlueCtaButton,
+  blueCtaClassName,
+  blueCtaStyle,
+  blueCtaTones,
+}
+export type { BlueCtaButtonProps, BlueCtaTone }

@@ -20,6 +20,8 @@ type NavLink = {
   label: string
 }
 
+type NavbarWidthBehavior = "expand" | "fixed"
+
 type LiquidGlassNavbarProps = {
   brand?: string
   version?: string
@@ -28,7 +30,7 @@ type LiquidGlassNavbarProps = {
   links?: readonly NavLink[]
   ctaHref?: string
   ctaLabel?: string
-  fixedWidth?: boolean
+  widthBehavior?: NavbarWidthBehavior
   contained?: boolean
   scrollContainerRef?: React.RefObject<HTMLElement | null>
   className?: string
@@ -79,7 +81,7 @@ function LiquidGlassNavbar({
   links = defaultLinks,
   ctaHref = "#",
   ctaLabel = "Get SessionWatcher",
-  fixedWidth = false,
+  widthBehavior = "expand",
   contained = false,
   scrollContainerRef,
   className,
@@ -89,12 +91,7 @@ function LiquidGlassNavbar({
     container: scrollContainerRef,
     layoutEffect: false,
   })
-  const animatedWidth = useTransform(
-    scrollY,
-    [0, 400],
-    [fixedWidth ? "100%" : "50%", "120%"]
-  )
-  const staticWidth = fixedWidth ? "100%" : "85%"
+  const animatedWidth = useTransform(scrollY, [0, 400], ["50%", "120%"])
   const containedWidth = useTransform(scrollY, [0, 320], ["92%", "100%"])
   const mobileNav = React.useRef<HTMLElement>(null)
   const desktopNav = React.useRef<HTMLElement>(null)
@@ -129,7 +126,7 @@ function LiquidGlassNavbar({
       instance?.destroy()
       media.removeEventListener("change", mount)
     }
-  }, [])
+  }, [widthBehavior])
 
   const positioning = contained
     ? "sticky top-4 inset-x-0 h-0"
@@ -183,13 +180,16 @@ function LiquidGlassNavbar({
         aria-label="Main navigation"
         className="hidden max-w-[1200px] rounded-full px-3 py-3 pl-4 backdrop-blur-md sm:block"
         style={{
-          width: contained
-            ? prefersReducedMotion
+          width:
+            widthBehavior === "fixed"
               ? "100%"
-              : containedWidth
-            : prefersReducedMotion
-              ? staticWidth
-              : animatedWidth,
+              : contained
+                ? prefersReducedMotion
+                  ? "100%"
+                  : containedWidth
+                : prefersReducedMotion
+                  ? "85%"
+                  : animatedWidth,
         }}
       >
         <div className="relative flex items-center justify-between">
@@ -234,4 +234,4 @@ function LiquidGlassNavbar({
 }
 
 export { LiquidGlassNavbar }
-export type { LiquidGlassNavbarProps, NavLink }
+export type { LiquidGlassNavbarProps, NavbarWidthBehavior, NavLink }

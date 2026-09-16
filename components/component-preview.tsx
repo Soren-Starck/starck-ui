@@ -5,26 +5,44 @@ import Image from "next/image"
 
 import { blueCtaButtonExample, liquidGlassNavbarExample } from "@/lib/examples"
 import { BlueCtaButton } from "@/registry/default/blue-cta-button"
+import type { BlueCtaTone } from "@/registry/default/blue-cta-button"
 import { LiquidGlassNavbar } from "@/registry/default/liquid-glass-navbar"
+import type { NavbarWidthBehavior } from "@/registry/default/liquid-glass-navbar"
 
 // Free stock photographs from Unsplash. Source pages:
 // https://unsplash.com/photos/-Ksr263JEa8
 // https://unsplash.com/photos/5aXEo-hGwU0
 // https://unsplash.com/photos/lEzMTXWjnFo
 
-function ComponentPreview({ slug }: { slug: string }) {
+type ComponentPreviewProps = {
+  slug: string
+  blueCtaTone: BlueCtaTone
+  navbarWidthBehavior: NavbarWidthBehavior
+}
+
+function ComponentPreview({
+  slug,
+  blueCtaTone,
+  navbarWidthBehavior,
+}: ComponentPreviewProps) {
   if (slug === "blue-cta-button") {
     return (
       <div className="preview-grid flex min-h-72 items-center justify-center overflow-hidden rounded-2xl border">
-        <BlueCtaButton>{blueCtaButtonExample.label}</BlueCtaButton>
+        <BlueCtaButton tone={blueCtaTone}>
+          {blueCtaButtonExample.label}
+        </BlueCtaButton>
       </div>
     )
   }
 
-  return <LiquidGlassNavbarPreview />
+  return <LiquidGlassNavbarPreview widthBehavior={navbarWidthBehavior} />
 }
 
-function LiquidGlassNavbarPreview() {
+function LiquidGlassNavbarPreview({
+  widthBehavior,
+}: {
+  widthBehavior: NavbarWidthBehavior
+}) {
   const containerRef = React.useRef<HTMLDivElement>(null)
 
   return (
@@ -36,6 +54,7 @@ function LiquidGlassNavbarPreview() {
       >
         <LiquidGlassNavbar
           {...liquidGlassNavbarExample}
+          widthBehavior={widthBehavior}
           contained
           scrollContainerRef={containerRef}
         />
