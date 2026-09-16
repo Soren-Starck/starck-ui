@@ -36,10 +36,6 @@ function LiquidGlassNavbarCardPreview() {
     return () => observer.disconnect()
   }, [])
 
-  React.useEffect(() => {
-    if (scrollRef.current) scrollRef.current.scrollTop = 150
-  }, [])
-
   return (
     <div ref={frameRef} className="preview-grid relative h-56 overflow-hidden">
       <div
@@ -61,7 +57,7 @@ function LiquidGlassNavbarCardPreview() {
           >
             <LiquidGlassNavbar
               {...liquidGlassNavbarExample}
-              widthBehavior="fixed"
+              widthBehavior="expand"
               contained
               scrollContainerRef={scrollRef}
             />
