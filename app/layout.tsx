@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
+import Script from "next/script"
 
 import "./globals.css"
 import { DocsShell } from "@/components/docs-shell"
@@ -12,6 +13,8 @@ const fontMono = Geist_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
 })
+
+const datafastEnabled = process.env.VERCEL_ENV === "production"
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ui.starck.studio"),
@@ -50,6 +53,14 @@ export default function RootLayout({
         <ThemeProvider>
           <DocsShell>{children}</DocsShell>
         </ThemeProvider>
+        {datafastEnabled ? (
+          <Script
+            data-website-id="dfid_bh5lERvTjvgk4ckq4lpq4"
+            data-domain="ui.starck.studio"
+            src="https://datafa.st/js/script.js"
+            strategy="afterInteractive"
+          />
+        ) : null}
       </body>
     </html>
   )
