@@ -108,7 +108,7 @@ function MacbookMockup({
             onClick={() => setOpen(true)}
             className="group absolute [inset:11.7%_11.6%_11.6%] z-20 cursor-zoom-in rounded-lg focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
           >
-            <span className="absolute inset-0 grid place-items-center rounded-xl bg-black/0 transition-colors group-hover:bg-black/35 group-focus-visible:bg-black/35">
+            <span className="absolute inset-0 grid place-items-center bg-black/0 transition-colors group-hover:bg-black/35 group-focus-visible:bg-black/35">
               <span className="translate-y-1 rounded-full bg-white/95 px-3 py-1.5 text-xs font-medium text-zinc-950 opacity-0 shadow-lg transition-[opacity,transform] group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100">
                 Fullscreen
               </span>

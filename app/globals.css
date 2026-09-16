@@ -204,6 +204,13 @@
   background-size: 24px 24px;
 }
 
+/* Catalogue cards own the grid so scaled previews never draw a second,
+   smaller pattern on top of it. */
+.component-card-stage .preview-grid {
+  background-color: transparent;
+  background-image: none;
+}
+
 .preview-scroll {
   scrollbar-color: color-mix(in oklab, var(--foreground), transparent 65%)
     transparent;

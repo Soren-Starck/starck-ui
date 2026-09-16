@@ -38,12 +38,6 @@ function DocsShell({ children }: { children: React.ReactNode }) {
             >
               Usage
             </Link>
-            <a
-              href="/llms.txt"
-              className="block rounded-lg px-3 py-2 text-muted-foreground transition-colors hover:bg-sidebar-accent hover:text-foreground"
-            >
-              llms.txt
-            </a>
           </div>
           <div>
             <p className="px-3 pb-2 text-[10px] font-semibold tracking-[0.14em] text-muted-foreground/55 uppercase">

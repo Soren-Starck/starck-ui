@@ -34,7 +34,10 @@ function ScaledComponentCardPreview({ slug }: { slug: string }) {
   }, [])
 
   return (
-    <div ref={frameRef} className="preview-grid relative h-56 overflow-hidden">
+    <div
+      ref={frameRef}
+      className="component-card-stage preview-grid relative h-56 overflow-hidden"
+    >
       <div
         className="absolute top-3 left-1/2 overflow-hidden"
         style={{
