@@ -46,7 +46,7 @@ function DocsShell({ children }: { children: React.ReactNode }) {
             </a>
           </div>
           <div>
-            <p className="px-3 pb-2 text-[11px] font-medium tracking-[0.08em] text-muted-foreground uppercase">
+            <p className="px-3 pb-2 text-[10px] font-semibold tracking-[0.14em] text-muted-foreground/55 uppercase">
               Components
             </p>
             <div className="space-y-1">

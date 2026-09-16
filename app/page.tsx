@@ -1,5 +1,8 @@
 import Link from "next/link"
+import { ArrowUpRight01Icon } from "@hugeicons/core-free-icons"
+import { HugeiconsIcon } from "@hugeicons/react"
 
+import { ComponentCardPreview } from "@/components/component-card-preview"
 import { Badge } from "@/components/ui/badge"
 import { buttonVariants } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
@@ -53,23 +56,43 @@ export default function Page() {
             {components.length} total
           </span>
         </div>
-        <div className="divide-y rounded-2xl border">
-          {components.map((component, index) => (
-            <Link
+        <div className="grid gap-5 md:grid-cols-2">
+          {components.map((component) => (
+            <article
               key={component.slug}
-              href={`/components/${component.slug}`}
-              className="group grid gap-3 p-6 transition-colors hover:bg-muted/45 sm:grid-cols-[1fr_auto] sm:items-center"
+              className="group relative overflow-hidden rounded-3xl border bg-card transition-[transform,box-shadow,border-color] duration-300 focus-within:border-foreground/20 focus-within:ring-2 focus-within:ring-ring/30 hover:-translate-y-0.5 hover:border-foreground/15 hover:shadow-[0_24px_70px_-42px_rgba(0,0,0,0.45)] motion-reduce:transform-none motion-reduce:transition-none"
             >
-              <div>
-                <h3 className="font-medium">{component.title}</h3>
-                <p className="mt-1 max-w-2xl text-sm leading-6 text-muted-foreground">
+              <div
+                className="pointer-events-none border-b"
+                aria-hidden="true"
+                inert
+              >
+                <ComponentCardPreview slug={component.slug} />
+              </div>
+              <div className="p-5 sm:p-6">
+                <div className="flex items-start justify-between gap-4">
+                  <h3 className="text-base font-medium tracking-[-0.015em]">
+                    {component.title}
+                  </h3>
+                  <span className="grid size-8 shrink-0 place-items-center rounded-full border text-muted-foreground transition-[color,transform,border-color] duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:border-foreground/20 group-hover:text-foreground motion-reduce:transform-none">
+                    <HugeiconsIcon
+                      icon={ArrowUpRight01Icon}
+                      size={15}
+                      strokeWidth={1.8}
+                      aria-hidden="true"
+                    />
+                  </span>
+                </div>
+                <p className="mt-2 line-clamp-2 text-sm leading-6 text-muted-foreground">
                   {component.description}
                 </p>
               </div>
-              <span className="text-sm text-muted-foreground transition-colors group-hover:text-foreground">
-                {String(index + 1).padStart(2, "0")} →
-              </span>
-            </Link>
+              <Link
+                href={`/components/${component.slug}`}
+                aria-label={`View ${component.title}`}
+                className="absolute inset-0 rounded-3xl focus-visible:outline-none"
+              />
+            </article>
           ))}
         </div>
       </section>
