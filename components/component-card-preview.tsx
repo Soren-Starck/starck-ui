@@ -2,6 +2,7 @@
 
 import * as React from "react"
 
+import { ComponentPreview } from "@/components/component-preview"
 import { blueCtaButtonExample, liquidGlassNavbarExample } from "@/lib/examples"
 import { BlueCtaButton } from "@/registry/default/blue-cta-button"
 import { LiquidGlassNavbar } from "@/registry/default/liquid-glass-navbar"
@@ -86,6 +87,46 @@ function LiquidGlassNavbarCardPreview() {
   )
 }
 
+function ScaledComponentCardPreview({ slug }: { slug: string }) {
+  const frameRef = React.useRef<HTMLDivElement>(null)
+  const [scale, setScale] = React.useState(0.52)
+
+  React.useLayoutEffect(() => {
+    const frame = frameRef.current
+    if (!frame) return
+    const update = () =>
+      setScale(Math.min(Math.max((frame.clientWidth - 24) / 800, 0.34), 0.64))
+    const observer = new ResizeObserver(update)
+    observer.observe(frame)
+    update()
+    return () => observer.disconnect()
+  }, [])
+
+  return (
+    <div ref={frameRef} className="preview-grid relative h-56 overflow-hidden">
+      <div
+        className="absolute top-3 left-1/2 overflow-hidden"
+        style={{
+          width: 800 * scale,
+          height: 560 * scale,
+          transform: "translateX(-50%)",
+        }}
+      >
+        <div
+          className="w-[800px] origin-top-left"
+          style={{ transform: `scale(${scale})` }}
+        >
+          <ComponentPreview
+            slug={slug}
+            blueCtaTone={blueCtaButtonExample.tone}
+            navbarWidthBehavior={liquidGlassNavbarExample.widthBehavior}
+          />
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function ComponentCardPreview({ slug }: { slug: string }) {
   if (slug === "liquid-glass-navbar") {
     return <LiquidGlassNavbarCardPreview />
@@ -95,11 +136,7 @@ function ComponentCardPreview({ slug }: { slug: string }) {
     return <BlueCtaCardPreview />
   }
 
-  return (
-    <div className="preview-grid flex h-56 items-center justify-center text-sm text-muted-foreground">
-      Preview coming soon
-    </div>
-  )
+  return <ScaledComponentCardPreview slug={slug} />
 }
 
 export { ComponentCardPreview }

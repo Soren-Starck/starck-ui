@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pricing-block",
+  "title": "Pricing Block",
+  "author": "STARCK",
+  "description": "A responsive multi-plan block built from the single pricing card.",
+  "registryDependencies": [
+    "https://ui.starck.studio/r/single-pricing-card.json"
+  ],
+  "files": [
+    {
+      "path": "registry/default/pricing-block.tsx",
+      "content": "import { SinglePricingCard, type PricingPlan } from \"./single-pricing-card\"\n\ntype PricingBlockProps = {\n  plans: readonly PricingPlan[]\n  className?: string\n}\n\nfunction PricingBlock({ plans, className = \"\" }: PricingBlockProps) {\n  return (\n    <div\n      className={`grid items-stretch gap-4 ${plans.length > 1 ? \"md:grid-cols-2\" : \"max-w-md\"} ${plans.length > 2 ? \"lg:grid-cols-3\" : \"\"} ${className}`}\n    >\n      {plans.map((plan) => (\n        <SinglePricingCard key={plan.name} {...plan} />\n      ))}\n    </div>\n  )\n}\n\nexport { PricingBlock }\nexport type { PricingBlockProps }\n",
+      "type": "registry:component",
+      "target": "components/pricing-block.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

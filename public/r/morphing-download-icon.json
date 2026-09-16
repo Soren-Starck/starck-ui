@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "morphing-download-icon",
+  "title": "Morphing Download Icon",
+  "author": "STARCK",
+  "description": "An Apple-to-download icon transition for Mac download actions.",
+  "dependencies": [
+    "framer-motion@^11.0.0"
+  ],
+  "files": [
+    {
+      "path": "registry/default/morphing-download-icon.tsx",
+      "content": "\"use client\"\n\nimport { motion } from \"framer-motion\"\n\nconst APPLE_BODY =\n  \"M12 6 L14 5 L17 6 L19 9 L18 13 L16 17 L13 18 L10 17 L7 18 L5 15 L4 11 L5 8 L8 6 Z\"\nconst DOWNLOAD_BODY =\n  \"M10 3 L14 3 L14 10 L18 10 L15 13 L12 16 L9 13 L6 10 L10 10 L10 7 L10 5 L10 4 L10 3 Z\"\nconst APPLE_DETAIL = \"M12 5 L13 2 L16 1 L15 4 Z\"\nconst DOWNLOAD_DETAIL = \"M5 18 L19 18 L19 21 L5 21 Z\"\n\ntype MorphingDownloadIconProps = {\n  hover: boolean\n  className?: string\n}\n\nfunction MorphingDownloadIcon({\n  hover,\n  className = \"size-5\",\n}: MorphingDownloadIconProps) {\n  const transition = { duration: 0.34, ease: [0.22, 1, 0.36, 1] as const }\n\n  return (\n    <motion.svg\n      viewBox=\"0 0 24 24\"\n      fill=\"currentColor\"\n      className={className}\n      animate={{ y: hover ? 1 : 0 }}\n      transition={transition}\n      aria-hidden=\"true\"\n    >\n      <motion.path\n        initial={false}\n        animate={{ d: hover ? DOWNLOAD_BODY : APPLE_BODY }}\n        transition={transition}\n      />\n      <motion.path\n        initial={false}\n        animate={{ d: hover ? DOWNLOAD_DETAIL : APPLE_DETAIL }}\n        transition={transition}\n      />\n    </motion.svg>\n  )\n}\n\nexport { MorphingDownloadIcon }\nexport type { MorphingDownloadIconProps }\n",
+      "type": "registry:component",
+      "target": "components/morphing-download-icon.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

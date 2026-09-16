@@ -3,11 +3,40 @@
 import * as React from "react"
 import Image from "next/image"
 
-import { blueCtaButtonExample, liquidGlassNavbarExample } from "@/lib/examples"
+import {
+  blueCtaButtonExample,
+  gradientFaqExample,
+  liquidGlassNavbarExample,
+  macbookMockupExample,
+  morphingDownloadIconExample,
+  pricingBlockExample,
+  providerOrbitExample,
+  releaseHistoryExample,
+  scrollRevealExample,
+  singlePricingCardExample,
+  socialProofExample,
+  stickyProductCtaExample,
+  terminalCommandExample,
+  testimonialsGridExample,
+  whatsNewCardExample,
+} from "@/lib/examples"
 import { BlueCtaButton } from "@/registry/default/blue-cta-button"
 import type { BlueCtaTone } from "@/registry/default/blue-cta-button"
+import { GradientFaq } from "@/registry/default/gradient-faq"
 import { LiquidGlassNavbar } from "@/registry/default/liquid-glass-navbar"
 import type { NavbarWidthBehavior } from "@/registry/default/liquid-glass-navbar"
+import { MacbookMockup } from "@/registry/default/macbook-mockup"
+import { MorphingDownloadIcon } from "@/registry/default/morphing-download-icon"
+import { PricingBlock } from "@/registry/default/pricing-block"
+import { ProviderOrbit } from "@/registry/default/provider-orbit"
+import { ReleaseHistoryDialog } from "@/registry/default/release-history-dialog"
+import { Reveal, Stagger, StaggerItem } from "@/registry/default/scroll-reveal"
+import { SinglePricingCard } from "@/registry/default/single-pricing-card"
+import { SocialProof } from "@/registry/default/social-proof"
+import { StickyProductCta } from "@/registry/default/sticky-product-cta"
+import { TerminalCommand } from "@/registry/default/terminal-command"
+import { TestimonialsGrid } from "@/registry/default/testimonials-grid"
+import { WhatsNewCard } from "@/registry/default/whats-new-card"
 
 // Free stock photographs from Unsplash. Source pages:
 // https://unsplash.com/photos/-Ksr263JEa8
@@ -18,14 +47,14 @@ type ComponentPreviewProps = {
   slug: string
   blueCtaTone: BlueCtaTone
   navbarWidthBehavior: NavbarWidthBehavior
-  blueCtaControls?: React.ReactNode
+  controls?: React.ReactNode
 }
 
 function ComponentPreview({
   slug,
   blueCtaTone,
   navbarWidthBehavior,
-  blueCtaControls,
+  controls,
 }: ComponentPreviewProps) {
   if (slug === "blue-cta-button") {
     return (
@@ -33,20 +62,263 @@ function ComponentPreview({
         <BlueCtaButton tone={blueCtaTone}>
           {blueCtaButtonExample.label}
         </BlueCtaButton>
-        {blueCtaControls ? (
-          <div className="absolute bottom-4 left-4">{blueCtaControls}</div>
+        {controls ? (
+          <div className="absolute bottom-4 left-4">{controls}</div>
         ) : null}
       </div>
     )
   }
 
-  return <LiquidGlassNavbarPreview widthBehavior={navbarWidthBehavior} />
+  if (slug === "gradient-faq") {
+    return (
+      <PreviewSurface>
+        <div className="w-full max-w-2xl">
+          <GradientFaq {...gradientFaqExample} />
+        </div>
+      </PreviewSurface>
+    )
+  }
+
+  if (slug === "scroll-reveal") {
+    return (
+      <PreviewSurface className="min-h-[24rem]">
+        <Reveal className="w-full max-w-3xl text-center">
+          <p className="text-3xl font-semibold tracking-[-0.04em]">
+            {scrollRevealExample.heading}
+          </p>
+          <Stagger className="mt-8 grid gap-3 sm:grid-cols-3">
+            {scrollRevealExample.cards.map((card) => (
+              <StaggerItem
+                key={card}
+                className="rounded-2xl border bg-background p-5 text-sm text-muted-foreground shadow-sm"
+              >
+                {card}
+              </StaggerItem>
+            ))}
+          </Stagger>
+        </Reveal>
+      </PreviewSurface>
+    )
+  }
+
+  if (slug === "terminal-command") {
+    return (
+      <PreviewSurface>
+        <TerminalCommand
+          {...terminalCommandExample}
+          className="w-full max-w-2xl"
+        />
+      </PreviewSurface>
+    )
+  }
+
+  if (slug === "macbook-mockup") {
+    return (
+      <PreviewSurface className="min-h-[30rem]">
+        <MacbookMockup className="w-full max-w-3xl">
+          <ProductPreview />
+        </MacbookMockup>
+      </PreviewSurface>
+    )
+  }
+
+  if (slug === "sticky-product-cta") {
+    return (
+      <PreviewSurface className="min-h-[22rem] pb-24">
+        <div className="max-w-lg text-center">
+          <p className="text-3xl font-semibold tracking-[-0.04em]">
+            Keep the next action close.
+          </p>
+          <p className="mt-3 text-sm leading-6 text-muted-foreground">
+            The contained preview uses the same component without attaching it
+            to the documentation viewport.
+          </p>
+        </div>
+        <StickyProductCta
+          title={stickyProductCtaExample.title}
+          description={stickyProductCtaExample.description}
+          showAfter={stickyProductCtaExample.showAfter}
+          contained={stickyProductCtaExample.contained}
+          secondaryAction={
+            <a href="#source" className="text-xs font-medium text-zinc-600">
+              {stickyProductCtaExample.secondaryLabel}
+            </a>
+          }
+          primaryAction={
+            <a
+              href="#install"
+              className="rounded-full bg-zinc-950 px-4 py-2 text-xs font-semibold text-white"
+            >
+              {stickyProductCtaExample.primaryLabel}
+            </a>
+          }
+        />
+      </PreviewSurface>
+    )
+  }
+
+  if (slug === "social-proof") {
+    return (
+      <PreviewSurface>
+        <SocialProof {...socialProofExample} />
+      </PreviewSurface>
+    )
+  }
+
+  if (slug === "testimonials-grid") {
+    return (
+      <PreviewSurface className="min-h-[34rem] items-stretch">
+        <TestimonialsGrid
+          {...testimonialsGridExample}
+          className="mx-auto w-full max-w-4xl"
+        />
+      </PreviewSurface>
+    )
+  }
+
+  if (slug === "whats-new-card") {
+    return (
+      <PreviewSurface>
+        <WhatsNewCard {...whatsNewCardExample} className="w-full max-w-sm" />
+      </PreviewSurface>
+    )
+  }
+
+  if (slug === "release-history-dialog") {
+    return (
+      <PreviewSurface>
+        <ReleaseHistoryDialog {...releaseHistoryExample} />
+      </PreviewSurface>
+    )
+  }
+
+  if (slug === "single-pricing-card") {
+    return (
+      <PreviewSurface className="min-h-[36rem]">
+        <SinglePricingCard
+          {...singlePricingCardExample}
+          className="w-full max-w-sm"
+        />
+      </PreviewSurface>
+    )
+  }
+
+  if (slug === "pricing-block") {
+    return (
+      <PreviewSurface className="min-h-[38rem] items-stretch">
+        <PricingBlock
+          plans={pricingBlockExample.plans}
+          className="mx-auto w-full max-w-3xl"
+        />
+      </PreviewSurface>
+    )
+  }
+
+  if (slug === "provider-orbit") {
+    return (
+      <PreviewSurface className="min-h-[34rem]">
+        <ProviderOrbit
+          center={providerOrbitExample.center}
+          duration={providerOrbitExample.duration}
+          items={providerOrbitExample.items.map((item) => ({
+            name: item.name,
+            icon: <span style={{ color: item.color }}>{item.initials}</span>,
+          }))}
+        />
+      </PreviewSurface>
+    )
+  }
+
+  if (slug === "morphing-download-icon") {
+    return (
+      <PreviewSurface>
+        <MorphingDownloadButton />
+      </PreviewSurface>
+    )
+  }
+
+  if (slug !== "liquid-glass-navbar") {
+    return null
+  }
+
+  return (
+    <LiquidGlassNavbarPreview
+      widthBehavior={navbarWidthBehavior}
+      controls={controls}
+    />
+  )
+}
+
+function PreviewSurface({
+  children,
+  className = "",
+}: {
+  children: React.ReactNode
+  className?: string
+}) {
+  return (
+    <div
+      className={`preview-grid relative flex min-h-80 items-center justify-center overflow-hidden rounded-2xl border p-6 sm:p-10 ${className}`}
+    >
+      {children}
+    </div>
+  )
+}
+
+function ProductPreview() {
+  return (
+    <div className="relative flex size-full flex-col overflow-hidden bg-gradient-to-br from-blue-50 via-white to-violet-100 p-[7%]">
+      <div className="flex items-center gap-2">
+        <span className="size-2 rounded-full bg-red-400" />
+        <span className="size-2 rounded-full bg-amber-400" />
+        <span className="size-2 rounded-full bg-emerald-400" />
+      </div>
+      <div className="m-auto max-w-md text-center">
+        <p className="text-[clamp(8px,1.4vw,14px)] text-zinc-500">
+          {macbookMockupExample.eyebrow}
+        </p>
+        <p className="mt-2 text-[clamp(14px,3vw,34px)] leading-tight font-semibold tracking-[-0.04em] text-zinc-950">
+          {macbookMockupExample.title}
+        </p>
+        <div className="mt-5 flex justify-center gap-2">
+          {macbookMockupExample.stats.map((stat) => (
+            <span
+              key={stat}
+              className="rounded-full bg-white/80 px-2.5 py-1 text-[clamp(6px,1vw,11px)] text-zinc-600 shadow-sm"
+            >
+              {stat}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function MorphingDownloadButton() {
+  const [hovered, setHovered] = React.useState(false)
+
+  return (
+    <button
+      type="button"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      onFocus={() => setHovered(true)}
+      onBlur={() => setHovered(false)}
+      className="inline-flex cursor-pointer items-center gap-2 rounded-full bg-zinc-950 px-5 py-3 text-sm font-semibold text-white shadow-lg"
+    >
+      <MorphingDownloadIcon hover={hovered} />
+      {morphingDownloadIconExample.label}
+    </button>
+  )
 }
 
 function LiquidGlassNavbarPreview({
   widthBehavior,
+  controls,
 }: {
   widthBehavior: NavbarWidthBehavior
+  controls?: React.ReactNode
 }) {
   const containerRef = React.useRef<HTMLDivElement>(null)
 
@@ -130,6 +402,9 @@ function LiquidGlassNavbarPreview({
           </div>
         </div>
       </div>
+      {controls ? (
+        <div className="absolute bottom-4 left-4 z-30">{controls}</div>
+      ) : null}
     </div>
   )
 }

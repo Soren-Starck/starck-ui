@@ -19,6 +19,9 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - Previews must expose the behavior that makes a component valuable. If motion,
   scrolling, hover, keyboard use, or responsive behavior matters, the preview
   must let a visitor exercise it directly.
+- Controls that change a component's appearance or behavior belong inside the
+  preview surface. Keep documentation controls such as Preview/Source and
+  install actions outside it.
 - The documentation app uses raw shadcn components from the configured preset.
   STARCK UI registry components remain source-owned and independent of the docs
   shell.

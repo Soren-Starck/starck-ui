@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "scroll-reveal",
+  "title": "Scroll Reveal",
+  "author": "STARCK",
+  "description": "Progressive reveal and stagger primitives with reduced-motion support.",
+  "dependencies": [
+    "framer-motion@^11.0.0"
+  ],
+  "files": [
+    {
+      "path": "registry/default/scroll-reveal.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport {\n  motion,\n  useInView,\n  useReducedMotion,\n  type Variants,\n} from \"framer-motion\"\n\nconst EASE = [0.22, 0.61, 0.36, 1] as const\n\nfunction Reveal({\n  children,\n  className = \"\",\n  delay = 0,\n  y = 20,\n}: {\n  children: React.ReactNode\n  className?: string\n  delay?: number\n  y?: number\n}) {\n  const ref = React.useRef<HTMLDivElement>(null)\n  const inView = useInView(ref, { once: true, amount: 0.15 })\n  const reduced = useReducedMotion()\n\n  return (\n    <motion.div\n      ref={ref}\n      className={className}\n      initial={{ opacity: 1, y: 0 }}\n      animate={\n        inView ? { opacity: 1, y: 0 } : { opacity: 0, y: reduced ? 0 : y }\n      }\n      transition={{\n        duration: reduced ? 0.2 : 0.65,\n        ease: EASE,\n        delay: reduced ? 0 : delay,\n      }}\n    >\n      {children}\n    </motion.div>\n  )\n}\n\nconst staggerVariants: Variants = {\n  hidden: {},\n  shown: ({ stagger, delayChildren }) => ({\n    transition: { staggerChildren: stagger, delayChildren },\n  }),\n}\n\nfunction Stagger({\n  children,\n  className = \"\",\n  stagger = 0.07,\n  delayChildren = 0,\n}: {\n  children: React.ReactNode\n  className?: string\n  stagger?: number\n  delayChildren?: number\n}) {\n  const ref = React.useRef<HTMLDivElement>(null)\n  const inView = useInView(ref, { once: true, amount: 0.15 })\n  const reduced = useReducedMotion()\n\n  return (\n    <motion.div\n      ref={ref}\n      className={className}\n      variants={staggerVariants}\n      initial=\"hidden\"\n      animate={inView ? \"shown\" : \"hidden\"}\n      custom={{\n        stagger: reduced ? 0 : stagger,\n        delayChildren: reduced ? 0 : delayChildren,\n      }}\n    >\n      {children}\n    </motion.div>\n  )\n}\n\nfunction StaggerItem({\n  children,\n  className = \"\",\n  y = 16,\n}: {\n  children: React.ReactNode\n  className?: string\n  y?: number\n}) {\n  const reduced = useReducedMotion()\n\n  return (\n    <motion.div\n      className={className}\n      variants={{\n        hidden: { opacity: 0, y: reduced ? 0 : y },\n        shown: {\n          opacity: 1,\n          y: 0,\n          transition: { duration: reduced ? 0.2 : 0.65, ease: EASE },\n        },\n      }}\n    >\n      {children}\n    </motion.div>\n  )\n}\n\nexport { Reveal, Stagger, StaggerItem }\n",
+      "type": "registry:component",
+      "target": "components/scroll-reveal.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

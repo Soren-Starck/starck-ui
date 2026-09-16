@@ -26,6 +26,7 @@ type ComponentWorkbenchProps = {
   slug: string
   title: string
   description: string
+  defaultUsage: string
   sources: readonly ComponentSource[]
 }
 
@@ -105,6 +106,7 @@ function ComponentWorkbench({
   slug,
   title,
   description,
+  defaultUsage,
   sources,
 }: ComponentWorkbenchProps) {
   const [blueCtaTone, setBlueCtaTone] = React.useState<BlueCtaTone>(
@@ -115,25 +117,19 @@ function ComponentWorkbench({
   const usage =
     slug === "blue-cta-button"
       ? blueCtaButtonUsage(blueCtaTone)
-      : liquidGlassNavbarUsage(navbarWidthBehavior)
+      : slug === "liquid-glass-navbar"
+        ? liquidGlassNavbarUsage(navbarWidthBehavior)
+        : defaultUsage
 
   return (
     <>
       <div className="mt-10">
         <Tabs defaultValue="preview">
           <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
-            <div className="flex flex-wrap items-center gap-2">
-              <TabsList>
-                <TabsTrigger value="preview">Preview</TabsTrigger>
-                <TabsTrigger value="source">Source</TabsTrigger>
-              </TabsList>
-              {slug !== "blue-cta-button" ? (
-                <WidthBehaviorControl
-                  value={navbarWidthBehavior}
-                  onChange={setNavbarWidthBehavior}
-                />
-              ) : null}
-            </div>
+            <TabsList>
+              <TabsTrigger value="preview">Preview</TabsTrigger>
+              <TabsTrigger value="source">Source</TabsTrigger>
+            </TabsList>
             <ComponentActions
               slug={slug}
               title={title}
@@ -146,9 +142,14 @@ function ComponentWorkbench({
               slug={slug}
               blueCtaTone={blueCtaTone}
               navbarWidthBehavior={navbarWidthBehavior}
-              blueCtaControls={
+              controls={
                 slug === "blue-cta-button" ? (
                   <ToneControl value={blueCtaTone} onChange={setBlueCtaTone} />
+                ) : slug === "liquid-glass-navbar" ? (
+                  <WidthBehaviorControl
+                    value={navbarWidthBehavior}
+                    onChange={setNavbarWidthBehavior}
+                  />
                 ) : undefined
               }
             />

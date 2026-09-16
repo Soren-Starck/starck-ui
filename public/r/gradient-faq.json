@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "gradient-faq",
+  "title": "Gradient FAQ",
+  "author": "STARCK",
+  "description": "An animated, crawlable FAQ accordion used by SessionWatcher and Moorline.",
+  "files": [
+    {
+      "path": "registry/default/gradient-faq.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\n\ntype GradientFaqItem = {\n  title: string\n  content: React.ReactNode\n}\n\ntype GradientFaqProps = {\n  items: readonly GradientFaqItem[]\n  defaultOpen?: number\n  className?: string\n}\n\nfunction GradientFaq({\n  items,\n  defaultOpen = 0,\n  className = \"\",\n}: GradientFaqProps) {\n  const [openIndex, setOpenIndex] = React.useState<number | null>(defaultOpen)\n  const id = React.useId()\n\n  return (\n    <div className={`space-y-2 ${className}`}>\n      {items.map((item, index) => {\n        const open = openIndex === index\n        const panelId = `${id}-panel-${index}`\n\n        return (\n          <div\n            key={item.title}\n            className=\"overflow-hidden rounded-xl border border-black/8 bg-white/76 transition-colors hover:bg-white\"\n          >\n            <button\n              type=\"button\"\n              aria-expanded={open}\n              aria-controls={panelId}\n              onClick={() => setOpenIndex(open ? null : index)}\n              className={`flex w-full cursor-pointer items-center justify-between gap-4 p-4 text-left transition-[padding] duration-300 ${open ? \"px-6 pt-6\" : \"\"}`}\n            >\n              <span className=\"text-base font-medium tracking-[-0.015em] text-zinc-950\">\n                {item.title}\n              </span>\n              <span\n                aria-hidden=\"true\"\n                className={`relative size-5 shrink-0 text-zinc-500 transition-transform duration-300 ${open ? \"rotate-45\" : \"\"}`}\n              >\n                <span className=\"absolute top-1/2 left-1/2 h-px w-3 -translate-x-1/2 -translate-y-1/2 bg-current\" />\n                <span className=\"absolute top-1/2 left-1/2 h-3 w-px -translate-x-1/2 -translate-y-1/2 bg-current\" />\n              </span>\n            </button>\n            <div\n              id={panelId}\n              className={`grid transition-[grid-template-rows] duration-300 ease-out ${open ? \"grid-rows-[1fr]\" : \"grid-rows-[0fr]\"}`}\n            >\n              <div className=\"overflow-hidden\">\n                <div\n                  className={`px-6 pb-5 text-sm leading-6 text-zinc-600 transition-opacity duration-300 ${open ? \"opacity-100\" : \"opacity-0\"}`}\n                >\n                  {item.content}\n                </div>\n              </div>\n            </div>\n          </div>\n        )\n      })}\n    </div>\n  )\n}\n\nexport { GradientFaq }\nexport type { GradientFaqItem, GradientFaqProps }\n",
+      "type": "registry:component",
+      "target": "components/gradient-faq.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

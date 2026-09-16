@@ -98,6 +98,7 @@ export default async function ComponentPage({ params }: Props) {
         slug={component.slug}
         title={component.title}
         description={component.description}
+        defaultUsage={component.usage}
         sources={sources}
       />
     </main>

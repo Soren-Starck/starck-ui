@@ -35,6 +35,122 @@ const componentProvenance = {
       "iconSrc": "/products/moorline.png",
       "evidence": "moorline-website/src/components/marketing/MoorlineHeader.tsx"
     }
+  ],
+  "gradient-faq": [
+    {
+      "name": "SessionWatcher",
+      "href": "https://sessionwatcher.com",
+      "iconSrc": "/products/sessionwatcher.png",
+      "evidence": "session-watcher-website/components/cuicui/GradientFAQ.tsx"
+    },
+    {
+      "name": "Moorline",
+      "href": "https://moorline.app",
+      "iconSrc": "/products/moorline.png",
+      "evidence": "moorline-website/src/components/cuicui/GradientFAQ.tsx"
+    }
+  ],
+  "scroll-reveal": [
+    {
+      "name": "Moorline",
+      "href": "https://moorline.app",
+      "iconSrc": "/products/moorline.png",
+      "evidence": "moorline-website/src/components/marketing/Reveal.tsx"
+    }
+  ],
+  "terminal-command": [
+    {
+      "name": "SessionWatcher",
+      "href": "https://sessionwatcher.com",
+      "iconSrc": "/products/sessionwatcher.png",
+      "evidence": "session-watcher-website/components/BrewCommand.tsx"
+    }
+  ],
+  "macbook-mockup": [
+    {
+      "name": "SessionWatcher",
+      "href": "https://sessionwatcher.com",
+      "iconSrc": "/products/sessionwatcher.png",
+      "evidence": "session-watcher-website/components/MacbookPreview.tsx"
+    }
+  ],
+  "sticky-product-cta": [
+    {
+      "name": "SessionWatcher",
+      "href": "https://sessionwatcher.com",
+      "iconSrc": "/products/sessionwatcher.png",
+      "evidence": "session-watcher-website/components/StickyBuyBar.tsx"
+    }
+  ],
+  "social-proof": [
+    {
+      "name": "SessionWatcher",
+      "href": "https://sessionwatcher.com",
+      "iconSrc": "/products/sessionwatcher.png",
+      "evidence": "session-watcher-website/components/SocialProof.tsx"
+    }
+  ],
+  "testimonials-grid": [
+    {
+      "name": "SessionWatcher",
+      "href": "https://sessionwatcher.com",
+      "iconSrc": "/products/sessionwatcher.png",
+      "evidence": "session-watcher-website/components/Testimonials.tsx"
+    }
+  ],
+  "whats-new-card": [
+    {
+      "name": "SessionWatcher",
+      "href": "https://sessionwatcher.com",
+      "iconSrc": "/products/sessionwatcher.png",
+      "evidence": "session-watcher-website/components/WhatsNewCard.tsx"
+    }
+  ],
+  "release-history-dialog": [
+    {
+      "name": "SessionWatcher",
+      "href": "https://sessionwatcher.com",
+      "iconSrc": "/products/sessionwatcher.png",
+      "evidence": "session-watcher-website/components/ReleaseHistoryDialog.tsx"
+    }
+  ],
+  "single-pricing-card": [
+    {
+      "name": "SessionWatcher",
+      "href": "https://sessionwatcher.com",
+      "iconSrc": "/products/sessionwatcher.png",
+      "evidence": "session-watcher-website/components/ToolPricingCard.tsx"
+    }
+  ],
+  "pricing-block": [
+    {
+      "name": "SessionWatcher",
+      "href": "https://sessionwatcher.com",
+      "iconSrc": "/products/sessionwatcher.png",
+      "evidence": "session-watcher-website/components/HomePricing.tsx"
+    },
+    {
+      "name": "Moorline",
+      "href": "https://moorline.app",
+      "iconSrc": "/products/moorline.png",
+      "evidence": "moorline-website/src/components/marketing/PricingTrust.tsx"
+    }
+  ],
+  "provider-orbit": [
+    {
+      "name": "Moorline",
+      "href": "https://moorline.app",
+      "iconSrc": "/products/moorline.png",
+      "evidence": "moorline-website/src/components/marketing/ProviderOrbit.tsx"
+    }
+  ],
+  "morphing-download-icon": [
+    {
+      "name": "SessionWatcher",
+      "href": "https://sessionwatcher.com",
+      "iconSrc": "/products/sessionwatcher.png",
+      "evidence": "session-watcher-website/components/MorphingDownloadIcon.tsx"
+    }
   ]
 } as const satisfies Record<string, readonly ComponentProvenance[]>
 
