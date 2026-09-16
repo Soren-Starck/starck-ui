@@ -55,6 +55,7 @@ const terminalCommandExample = {
 } as const
 
 const macbookMockupExample = {
+  frameSrc: "https://ui.starck.studio/preview/macbook-frame.webp",
   eyebrow: "Live workspace",
   title: "One glance. Then back to work.",
   stats: ["4 active", "72% remaining", "Resets in 1h"],
@@ -239,7 +240,7 @@ ${terminalCommandExample.lines.map((line) => `    "${line}",`).join("\n")}
   ]}
 />`
 
-const macbookMockupUsage = `<MacbookMockup>
+const macbookMockupUsage = `<MacbookMockup frameSrc="${macbookMockupExample.frameSrc}">
   <div className="relative flex size-full flex-col overflow-hidden bg-gradient-to-br from-blue-50 via-white to-violet-100 p-[7%]">
     <div className="flex items-center gap-2">
       <span className="size-2 rounded-full bg-red-400" />

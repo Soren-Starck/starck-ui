@@ -7,6 +7,7 @@ type MacbookMockupProps = {
   children: React.ReactNode
   className?: string
   expandable?: boolean
+  frameSrc?: string
   label?: string
 }
 
@@ -23,17 +24,28 @@ function CloseIcon() {
   )
 }
 
-function Frame({ children }: { children: React.ReactNode }) {
+function Frame({
+  children,
+  frameSrc,
+}: {
+  children: React.ReactNode
+  frameSrc: string
+}) {
   return (
-    <div className="relative mx-auto w-full max-w-4xl pb-[4.8%]">
-      <div className="relative overflow-hidden rounded-[3.2%] border-[clamp(6px,1.2vw,14px)] border-zinc-800 bg-zinc-950 shadow-[0_28px_80px_-38px_rgba(0,0,0,0.7)]">
-        <div className="absolute top-0 left-1/2 z-10 h-[2.2%] w-[13%] -translate-x-1/2 rounded-b-full bg-zinc-800" />
-        <div className="aspect-[16/10] overflow-hidden bg-zinc-100">
-          {children}
-        </div>
+    <div className="relative mx-auto aspect-[1792/1165] w-full max-w-4xl select-none">
+      <div className="absolute [inset:11.7%_11.6%_11.6%] z-0 overflow-hidden bg-zinc-100">
+        {children}
       </div>
-      <div className="absolute bottom-[1.3%] left-1/2 h-[4.3%] w-[112%] -translate-x-1/2 rounded-b-[45%] bg-gradient-to-b from-zinc-200 via-zinc-300 to-zinc-500 shadow-[0_8px_16px_-10px_rgba(0,0,0,0.8)]" />
-      <div className="absolute bottom-[3.5%] left-1/2 h-[1.2%] w-[16%] -translate-x-1/2 rounded-b-full bg-zinc-400/80" />
+      {/* This is the same photographed silver frame used by SessionWatcher. */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={frameSrc}
+        alt=""
+        width={1792}
+        height={1165}
+        draggable={false}
+        className="pointer-events-none relative z-10 block size-full object-contain"
+      />
     </div>
   )
 }
@@ -42,6 +54,7 @@ function MacbookMockup({
   children,
   className = "",
   expandable = true,
+  frameSrc = "https://ui.starck.studio/preview/macbook-frame.webp",
   label = "Open fullscreen preview",
 }: MacbookMockupProps) {
   const [open, setOpen] = React.useState(false)
@@ -81,7 +94,7 @@ function MacbookMockup({
     }
   }, [open])
 
-  const frame = <Frame>{children}</Frame>
+  const frame = <Frame frameSrc={frameSrc}>{children}</Frame>
 
   return (
     <>
@@ -93,7 +106,7 @@ function MacbookMockup({
             type="button"
             aria-label={label}
             onClick={() => setOpen(true)}
-            className="group absolute inset-[7%_5%_10%] cursor-zoom-in rounded-xl focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
+            className="group absolute [inset:11.7%_11.6%_11.6%] z-20 cursor-zoom-in rounded-lg focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
           >
             <span className="absolute inset-0 grid place-items-center rounded-xl bg-black/0 transition-colors group-hover:bg-black/35 group-focus-visible:bg-black/35">
               <span className="translate-y-1 rounded-full bg-white/95 px-3 py-1.5 text-xs font-medium text-zinc-950 opacity-0 shadow-lg transition-[opacity,transform] group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100">

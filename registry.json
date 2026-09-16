@@ -187,6 +187,7 @@
       "title": "Release History Dialog",
       "description": "A responsive, accessible release-notes dialog.",
       "author": "STARCK",
+      "dependencies": ["framer-motion@^11.0.0"],
       "files": [
         {
           "path": "registry/default/release-history-dialog.tsx",
@@ -247,7 +248,11 @@
       "title": "Morphing Download Icon",
       "description": "An Apple-to-download icon transition for Mac download actions.",
       "author": "STARCK",
-      "dependencies": ["framer-motion@^11.0.0"],
+      "dependencies": [
+        "framer-motion@^11.0.0",
+        "flubber@^0.4.2",
+        "@types/flubber@^0.4.0"
+      ],
       "files": [
         {
           "path": "registry/default/morphing-download-icon.tsx",

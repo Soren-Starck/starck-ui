@@ -71,7 +71,7 @@ function ComponentPreview({
 
   if (slug === "gradient-faq") {
     return (
-      <PreviewSurface>
+      <PreviewSurface className="h-[28rem] min-h-0">
         <div className="w-full max-w-2xl">
           <GradientFaq {...gradientFaqExample} />
         </div>
@@ -115,7 +115,10 @@ function ComponentPreview({
   if (slug === "macbook-mockup") {
     return (
       <PreviewSurface className="min-h-[30rem]">
-        <MacbookMockup className="w-full max-w-3xl">
+        <MacbookMockup
+          frameSrc={macbookMockupExample.frameSrc}
+          className="w-full max-w-3xl"
+        >
           <ProductPreview />
         </MacbookMockup>
       </PreviewSurface>
@@ -336,19 +339,28 @@ function LiquidGlassNavbarPreview({
           scrollContainerRef={containerRef}
         />
 
-        <div className="relative min-h-[1240px] overflow-hidden px-6 pt-32 pb-16 sm:px-12">
+        <div className="relative min-h-[1480px] overflow-hidden px-6 pt-32 pb-16 sm:px-12">
           <div className="absolute top-4 left-[12%] size-56 rounded-full bg-blue-400/45 blur-3xl" />
           <div className="absolute top-72 right-[8%] size-64 rounded-full bg-violet-400/40 blur-3xl" />
           <div className="absolute bottom-20 left-[22%] size-56 rounded-full bg-cyan-300/35 blur-3xl" />
 
-          <div className="relative mx-auto max-w-2xl text-center">
-            <p className="text-sm text-muted-foreground">Scroll this preview</p>
-            <p className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
-              Watch detail bend through glass.
-            </p>
-          </div>
+          <section className="relative mx-auto grid min-h-[330px] max-w-4xl items-center gap-10 sm:grid-cols-[1.15fr_0.85fr]">
+            <div>
+              <p className="text-sm text-muted-foreground">Liquid interface</p>
+              <h2 className="mt-3 max-w-md text-4xl leading-[0.95] font-semibold tracking-[-0.05em] sm:text-6xl">
+                Navigation with depth.
+              </h2>
+            </div>
+            <div className="grid gap-4">
+              <div className="h-28 rounded-3xl bg-blue-500/70 sm:h-32" />
+              <div className="h-20 rounded-3xl bg-violet-500/55 sm:h-24" />
+            </div>
+          </section>
 
-          <div className="relative mx-auto mt-10 max-w-4xl">
+          <div className="relative mx-auto mt-24 max-w-4xl">
+            <p className="mb-5 text-sm text-muted-foreground">
+              Scroll to watch color and detail move beneath the glass.
+            </p>
             <figure className="overflow-hidden rounded-3xl border border-white/20 bg-sky-500 shadow-[0_24px_80px_-32px_rgba(37,99,235,0.55)]">
               <Image
                 src="/preview/glass-architecture.webp"

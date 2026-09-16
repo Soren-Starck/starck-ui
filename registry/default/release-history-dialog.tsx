@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import { createPortal } from "react-dom"
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion"
 
 type ReleaseEntry = {
   version: string
@@ -23,6 +24,7 @@ function ReleaseHistoryDialog({
   description = "Every release, newest first.",
 }: ReleaseHistoryDialogProps) {
   const [open, setOpen] = React.useState(false)
+  const reduceMotion = useReducedMotion()
   const titleId = React.useId()
   const triggerRef = React.useRef<HTMLButtonElement>(null)
   const dialogRef = React.useRef<HTMLDivElement>(null)
@@ -35,7 +37,7 @@ function ReleaseHistoryDialog({
       if (event.key !== "Tab") return
 
       const focusable = dialogRef.current?.querySelectorAll<HTMLElement>(
-        'button:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])'
+        'button:not([disabled]):not([tabindex="-1"]), a[href], [tabindex]:not([tabindex="-1"])'
       )
       if (!focusable?.length) return
       const first = focusable[0]
@@ -71,75 +73,101 @@ function ReleaseHistoryDialog({
       >
         {triggerLabel}
       </button>
-      {open && typeof document !== "undefined"
+      {typeof document !== "undefined"
         ? createPortal(
-            <div
-              role="dialog"
-              aria-modal="true"
-              aria-labelledby={titleId}
-              className="fixed inset-0 z-[100] flex items-end justify-center sm:items-center sm:p-6"
-            >
-              <button
-                type="button"
-                tabIndex={-1}
-                aria-label="Close release history"
-                onClick={() => setOpen(false)}
-                className="absolute inset-0 cursor-default bg-black/40 backdrop-blur-sm"
-              />
-              <div
-                ref={dialogRef}
-                className="relative flex max-h-[88vh] w-full max-w-2xl flex-col overflow-hidden rounded-t-3xl border border-black/10 bg-white shadow-2xl sm:max-h-[80vh] sm:rounded-3xl"
-              >
-                <header className="flex shrink-0 items-start justify-between gap-4 border-b border-black/8 px-5 py-4">
-                  <div>
-                    <h2
-                      id={titleId}
-                      className="font-semibold tracking-tight text-zinc-950"
-                    >
-                      {title}
-                    </h2>
-                    <p className="mt-1 text-xs text-zinc-500">{description}</p>
-                  </div>
+            <AnimatePresence>
+              {open ? (
+                <motion.div
+                  role="dialog"
+                  aria-modal="true"
+                  aria-labelledby={titleId}
+                  className="fixed inset-0 z-[100] flex items-end justify-center sm:items-center sm:p-6"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: reduceMotion ? 0 : 0.18 }}
+                >
                   <button
-                    ref={closeRef}
                     type="button"
+                    tabIndex={-1}
+                    aria-label="Close release history"
                     onClick={() => setOpen(false)}
-                    aria-label="Close"
-                    className="grid size-8 cursor-pointer place-items-center rounded-full text-zinc-500 hover:bg-zinc-100 hover:text-zinc-950"
+                    className="absolute inset-0 cursor-default bg-black/40 backdrop-blur-sm"
+                  />
+                  <motion.div
+                    ref={dialogRef}
+                    className="relative flex max-h-[88vh] w-full max-w-2xl flex-col overflow-hidden rounded-t-3xl border border-black/10 bg-white shadow-2xl sm:max-h-[80vh] sm:rounded-3xl"
+                    initial={
+                      reduceMotion
+                        ? { opacity: 1 }
+                        : { opacity: 0, y: 24, scale: 0.985 }
+                    }
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={
+                      reduceMotion
+                        ? { opacity: 0 }
+                        : { opacity: 0, y: 14, scale: 0.99 }
+                    }
+                    transition={
+                      reduceMotion
+                        ? { duration: 0 }
+                        : { duration: 0.26, ease: [0.22, 1, 0.36, 1] }
+                    }
                   >
-                    ×
-                  </button>
-                </header>
-                <ol className="space-y-4 overflow-y-auto p-5">
-                  {releases.map((release) => (
-                    <li
-                      key={release.version}
-                      className="rounded-2xl border border-black/8 bg-zinc-50/70 p-5"
-                    >
-                      <div className="flex flex-wrap items-center gap-2">
-                        <h3 className="font-semibold text-zinc-950">
-                          Version {release.version}
-                        </h3>
-                        <time className="rounded-full bg-white px-2.5 py-1 text-[11px] text-zinc-500 ring-1 ring-black/6">
-                          {release.date}
-                        </time>
+                    <header className="flex shrink-0 items-start justify-between gap-4 border-b border-black/8 px-5 py-4">
+                      <div>
+                        <h2
+                          id={titleId}
+                          className="font-semibold tracking-tight text-zinc-950"
+                        >
+                          {title}
+                        </h2>
+                        <p className="mt-1 text-xs text-zinc-500">
+                          {description}
+                        </p>
                       </div>
-                      <ul className="mt-3 space-y-2 text-sm leading-6 text-zinc-600">
-                        {release.notes.map((note) => (
-                          <li key={note} className="flex gap-2">
-                            <span
-                              aria-hidden
-                              className="mt-2 size-1 shrink-0 rounded-full bg-zinc-400"
-                            />
-                            <span>{note}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </li>
-                  ))}
-                </ol>
-              </div>
-            </div>,
+                      <button
+                        ref={closeRef}
+                        type="button"
+                        onClick={() => setOpen(false)}
+                        aria-label="Close"
+                        className="grid size-8 cursor-pointer place-items-center rounded-full text-zinc-500 hover:bg-zinc-100 hover:text-zinc-950"
+                      >
+                        ×
+                      </button>
+                    </header>
+                    <ol className="space-y-4 overflow-y-auto p-5">
+                      {releases.map((release) => (
+                        <li
+                          key={release.version}
+                          className="rounded-2xl border border-black/8 bg-zinc-50/70 p-5"
+                        >
+                          <div className="flex flex-wrap items-center gap-2">
+                            <h3 className="font-semibold text-zinc-950">
+                              Version {release.version}
+                            </h3>
+                            <time className="rounded-full bg-white px-2.5 py-1 text-[11px] text-zinc-500 ring-1 ring-black/6">
+                              {release.date}
+                            </time>
+                          </div>
+                          <ul className="mt-3 space-y-2 text-sm leading-6 text-zinc-600">
+                            {release.notes.map((note) => (
+                              <li key={note} className="flex gap-2">
+                                <span
+                                  aria-hidden
+                                  className="mt-2 size-1 shrink-0 rounded-full bg-zinc-400"
+                                />
+                                <span>{note}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </li>
+                      ))}
+                    </ol>
+                  </motion.div>
+                </motion.div>
+              ) : null}
+            </AnimatePresence>,
             document.body
           )
         : null}
