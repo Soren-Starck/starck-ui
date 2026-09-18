@@ -7,7 +7,7 @@
       "name": "blue-cta-button",
       "type": "registry:component",
       "title": "Blue CTA Button",
-      "description": "The dimensional call-to-action used by SessionWatcher, with configurable color tones.",
+      "description": "The dimensional call-to-action used by SessionWatcher, with configurable color tones and macOS or Windows platform modes.",
       "author": "STARCK",
       "files": [
         {
@@ -258,6 +258,20 @@
           "path": "registry/default/morphing-download-icon.tsx",
           "type": "registry:component",
           "target": "components/morphing-download-icon.tsx"
+        }
+      ]
+    },
+    {
+      "name": "founder-note",
+      "type": "registry:component",
+      "title": "Founder Note",
+      "description": "A personal maker's note with avatar, story, and contact links.",
+      "author": "STARCK",
+      "files": [
+        {
+          "path": "registry/default/founder-note.tsx",
+          "type": "registry:component",
+          "target": "components/founder-note.tsx"
         }
       ]
     }

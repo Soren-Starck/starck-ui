@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "founder-note",
+  "title": "Founder Note",
+  "author": "STARCK",
+  "description": "A personal maker's note with avatar, story, and contact links.",
+  "files": [
+    {
+      "path": "registry/default/founder-note.tsx",
+      "content": "/* eslint-disable @next/next/no-img-element */\n\ntype FounderNoteLink = {\n  label: string\n  href: string\n  icon: React.ReactNode\n}\n\ntype FounderNoteProps = {\n  name: string\n  role: string\n  avatarSrc: string\n  paragraphs: readonly string[]\n  links?: readonly FounderNoteLink[]\n  sticky?: boolean\n  className?: string\n}\n\nfunction FounderNote({\n  name,\n  role,\n  avatarSrc,\n  paragraphs,\n  links = [],\n  sticky = false,\n  className = \"\",\n}: FounderNoteProps) {\n  const [greeting, ...rest] = paragraphs\n\n  return (\n    <aside className={`${sticky ? \"lg:sticky lg:top-24\" : \"\"} ${className}`}>\n      <div className=\"rounded-2xl border border-black/8 bg-zinc-50 p-6 sm:p-8\">\n        <div className=\"flex items-center gap-4\">\n          <img\n            src={avatarSrc}\n            alt={name}\n            width={56}\n            height={56}\n            className=\"size-14 rounded-full object-cover ring-2 ring-black/8\"\n          />\n          <div>\n            <p className=\"text-base leading-snug font-semibold text-zinc-950\">\n              {name}\n            </p>\n            <p className=\"text-sm text-zinc-500\">{role}</p>\n          </div>\n        </div>\n\n        <div className=\"mt-6 space-y-4 text-[15px] leading-relaxed text-zinc-600\">\n          {greeting ? <p className=\"text-zinc-950\">{greeting}</p> : null}\n          {rest.map((paragraph) => (\n            <p key={paragraph}>{paragraph}</p>\n          ))}\n        </div>\n\n        {links.length > 0 ? (\n          <div className=\"mt-6 flex items-center gap-3 text-zinc-500\">\n            {links.map((link) => (\n              <a\n                key={link.href}\n                href={link.href}\n                target={link.href.startsWith(\"mailto:\") ? undefined : \"_blank\"}\n                rel={\n                  link.href.startsWith(\"mailto:\")\n                    ? undefined\n                    : \"noopener noreferrer\"\n                }\n                aria-label={link.label}\n                className=\"transition-colors hover:text-zinc-950\"\n              >\n                {link.icon}\n              </a>\n            ))}\n          </div>\n        ) : null}\n      </div>\n    </aside>\n  )\n}\n\nexport { FounderNote }\nexport type { FounderNoteLink, FounderNoteProps }\n",
+      "type": "registry:component",
+      "target": "components/founder-note.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

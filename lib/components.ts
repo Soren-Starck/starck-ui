@@ -1,5 +1,6 @@
 import {
   blueCtaButtonUsage,
+  founderNoteUsage,
   gradientFaqUsage,
   liquidGlassNavbarUsage,
   macbookMockupUsage,
@@ -32,7 +33,7 @@ const components = [
     slug: "blue-cta-button",
     title: "Blue CTA Button",
     description:
-      "SessionWatcher's dimensional CTA: sampled color tones, specular rim, soft glow, and a quick press state.",
+      "SessionWatcher's dimensional CTA: sampled color tones, specular rim, soft glow, a quick press state, and a macOS or Windows platform mode.",
     sourceFiles: ["registry/default/blue-cta-button.tsx"],
     usage: blueCtaButtonUsage(),
   },
@@ -142,6 +143,14 @@ const components = [
       "An Apple-to-download icon transition for Mac download calls to action.",
     sourceFiles: ["registry/default/morphing-download-icon.tsx"],
     usage: morphingDownloadIconUsage,
+  },
+  {
+    slug: "founder-note",
+    title: "Founder Note",
+    description:
+      "A personal note from the maker, placed beside support content to put a person behind the product.",
+    sourceFiles: ["registry/default/founder-note.tsx"],
+    usage: founderNoteUsage,
   },
 ] as const
 

@@ -4,9 +4,14 @@ const blueCtaTones = ["blue", "violet", "emerald", "rose"] as const
 
 type BlueCtaTone = (typeof blueCtaTones)[number]
 
+const blueCtaPlatforms = ["macos", "windows"] as const
+
+type BlueCtaPlatform = (typeof blueCtaPlatforms)[number]
+
 type BlueCtaButtonProps = React.ComponentProps<"button"> & {
   icon?: React.ReactNode
   tone?: BlueCtaTone
+  platform?: BlueCtaPlatform
 }
 
 type BlueCtaToneStyle = React.CSSProperties & {
@@ -49,7 +54,17 @@ const blueCtaToneStyles = {
 } satisfies Record<BlueCtaTone, BlueCtaToneStyle>
 
 const blueCtaClassName =
-  "starck-blue-cta inline-flex cursor-pointer items-center justify-center gap-1.5 rounded-full px-5 py-2 text-sm font-medium tracking-[-0.022em] whitespace-nowrap text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--starck-blue-cta-glow)/0.6)] focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+  "starck-blue-cta inline-flex cursor-pointer items-center justify-center gap-1.5 px-5 py-2 text-sm font-medium tracking-[-0.022em] whitespace-nowrap text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--starck-blue-cta-glow)/0.6)] focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+
+// The capsule is an Apple shape: macOS has drawn fully-rounded buttons since
+// Big Sur, so it reads as native there. Windows 11 has no such shape - Fluent
+// buttons are rounded rectangles - and a pill next to a Windows logo looks like
+// a Mac button in costume. 10px reads as Fluent at CTA scale without going
+// sharp next to soft cards.
+const blueCtaPlatformClassNames = {
+  macos: "rounded-full",
+  windows: "rounded-[10px]",
+} satisfies Record<BlueCtaPlatform, string>
 
 const blueCtaStyle = {
   fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
@@ -68,10 +83,40 @@ function AppleMark({ className }: { className?: string }) {
   )
 }
 
+// The Windows 11 mark: four equal panes, no perspective. It stays legible at
+// 15px, where the tilted Windows 8/10 logo turns to mush.
+function WindowsMark({ className }: { className?: string }) {
+  return (
+    <svg
+      aria-hidden="true"
+      className={className}
+      fill="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path d="M1 1h9.7v9.7H1zM13.3 1H23v9.7h-9.7zM1 13.3h9.7V23H1zM13.3 13.3H23V23h-9.7z" />
+    </svg>
+  )
+}
+
+function PlatformMark({
+  platform,
+  className,
+}: {
+  platform: BlueCtaPlatform
+  className?: string
+}) {
+  return platform === "windows" ? (
+    <WindowsMark className={className} />
+  ) : (
+    <AppleMark className={className} />
+  )
+}
+
 function BlueCtaButton({
   children = "Get SessionWatcher",
   className,
   icon,
+  platform = "macos",
   style,
   tone = "blue",
   type = "button",
@@ -80,7 +125,13 @@ function BlueCtaButton({
   return (
     <button
       type={type}
-      className={[blueCtaClassName, className].filter(Boolean).join(" ")}
+      className={[
+        blueCtaClassName,
+        blueCtaPlatformClassNames[platform],
+        className,
+      ]
+        .filter(Boolean)
+        .join(" ")}
       style={{
         ...blueCtaStyle,
         ...blueCtaToneStyles[tone],
@@ -88,7 +139,11 @@ function BlueCtaButton({
       }}
       {...props}
     >
-      {icon === undefined ? <AppleMark className="size-[15px]" /> : icon}
+      {icon === undefined ? (
+        <PlatformMark platform={platform} className="size-[15px]" />
+      ) : (
+        icon
+      )}
       {children}
     </button>
   )
@@ -98,7 +153,11 @@ export {
   AppleMark,
   BlueCtaButton,
   blueCtaClassName,
+  blueCtaPlatformClassNames,
+  blueCtaPlatforms,
   blueCtaStyle,
   blueCtaTones,
+  PlatformMark,
+  WindowsMark,
 }
-export type { BlueCtaButtonProps, BlueCtaTone }
+export type { BlueCtaButtonProps, BlueCtaPlatform, BlueCtaTone }

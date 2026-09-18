@@ -127,7 +127,7 @@ const componentProvenance = {
       "name": "SessionWatcher",
       "href": "https://sessionwatcher.com",
       "iconSrc": "/products/sessionwatcher.png",
-      "evidence": "session-watcher-website/components/HomePricing.tsx"
+      "evidence": "session-watcher-website/__tests__/ai-coding-tool-usage.test.mjs"
     },
     {
       "name": "Moorline",
@@ -150,6 +150,20 @@ const componentProvenance = {
       "href": "https://sessionwatcher.com",
       "iconSrc": "/products/sessionwatcher.png",
       "evidence": "session-watcher-website/components/MorphingDownloadIcon.tsx"
+    }
+  ],
+  "founder-note": [
+    {
+      "name": "SessionWatcher",
+      "href": "https://sessionwatcher.com",
+      "iconSrc": "/products/sessionwatcher.png",
+      "evidence": "session-watcher-website/components/FounderNote.tsx"
+    },
+    {
+      "name": "Moorline",
+      "href": "https://moorline.app",
+      "iconSrc": "/products/moorline.png",
+      "evidence": "moorline-website/src/components/marketing/Closing.tsx"
     }
   ]
 } as const satisfies Record<string, readonly ComponentProvenance[]>

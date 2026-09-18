@@ -36,7 +36,7 @@ yours.
 | Component                                                                            | What it does                                                                                    |
 | ------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
 | [Liquid Glass Navbar](https://ui.starck.studio/components/liquid-glass-navbar)       | Responsive navigation with expandable or fixed width, Chromium refraction, and a blur fallback. |
-| [Blue CTA Button](https://ui.starck.studio/components/blue-cta-button)               | A dimensional call to action with sampled color tones, a specular rim, and a quick press state. |
+| [Blue CTA Button](https://ui.starck.studio/components/blue-cta-button)               | A dimensional call to action with sampled color tones, a specular rim, a quick press state, and macOS or Windows platform modes. |
 | [Gradient FAQ](https://ui.starck.studio/components/gradient-faq)                     | An animated, crawlable accordion.                                                               |
 | [Scroll Reveal](https://ui.starck.studio/components/scroll-reveal)                   | Progressive reveal and stagger primitives with reduced-motion support.                          |
 | [Terminal Command](https://ui.starck.studio/components/terminal-command)             | A copyable command block with stable feedback and familiar macOS chrome.                        |
@@ -50,6 +50,7 @@ yours.
 | [Pricing Block](https://ui.starck.studio/components/pricing-block)                   | A responsive multi-plan block built from the single-plan card.                                  |
 | [Provider Orbit](https://ui.starck.studio/components/provider-orbit)                 | A reduced-motion-aware integration orbit that pauses on inspection.                             |
 | [Morphing Download Icon](https://ui.starck.studio/components/morphing-download-icon) | An Apple-to-download icon transition for Mac download calls to action.                          |
+| [Founder Note](https://ui.starck.studio/components/founder-note)                     | A personal maker’s note with avatar, story, and contact links.                                 |
 
 ## Principles
 

@@ -132,6 +132,12 @@ const componentSignatures = [
       return /\bMorphingDownloadIcon\b/.test(source)
     },
   },
+  {
+    slug: "founder-note",
+    matches(source) {
+      return /\bFounderNote\b/.test(source)
+    },
+  },
 ]
 
 function resolveProjectDirectory(project) {
@@ -159,7 +165,7 @@ function listSourceFiles(projectDirectory) {
 function evidenceScore(file) {
   let score = 0
   if (
-    /(?:GradientFAQ|Reveal|BrewCommand|TerminalCommand|MacbookPreview|MacbookMockup|StickyBuyBar|StickyProductCta|SocialProof|Testimonials|WhatsNewCard|ReleaseHistoryDialog|ToolPricingCard|SinglePricingCard|HomePricing|PricingTrust|PricingBlock|ProviderOrbit|MorphingDownloadIcon)\.[jt]sx?$/i.test(
+    /(?:GradientFAQ|Reveal|BrewCommand|TerminalCommand|MacbookPreview|MacbookMockup|StickyBuyBar|StickyProductCta|SocialProof|Testimonials|WhatsNewCard|ReleaseHistoryDialog|ToolPricingCard|SinglePricingCard|HomePricing|PricingTrust|PricingBlock|ProviderOrbit|MorphingDownloadIcon|FounderNote)\.[jt]sx?$/i.test(
       file
     )
   )

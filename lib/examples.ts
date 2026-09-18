@@ -1,4 +1,7 @@
-import type { BlueCtaTone } from "@/registry/default/blue-cta-button"
+import type {
+  BlueCtaPlatform,
+  BlueCtaTone,
+} from "@/registry/default/blue-cta-button"
 import type { NavbarWidthBehavior } from "@/registry/default/liquid-glass-navbar"
 
 const liquidGlassNavbarExample = {
@@ -18,6 +21,7 @@ const liquidGlassNavbarExample = {
 const blueCtaButtonExample = {
   label: "Get SessionWatcher",
   tone: "blue" as BlueCtaTone,
+  platform: "macos" as BlueCtaPlatform,
 } as const
 
 const gradientFaqExample = {
@@ -185,6 +189,22 @@ const morphingDownloadIconExample = {
   label: "Download for Mac",
 } as const
 
+const founderNoteExample = {
+  name: "Soren Starck",
+  role: "Founder of SessionWatcher",
+  avatarSrc: "https://unavatar.io/x/SorenStarck",
+  paragraphs: [
+    "👋 Hey! I’m Soren, the founder of SessionWatcher.",
+    "I built SessionWatcher because I kept losing 1–3 hours every week to surprise rate-limit lockouts across my AI coding tools.",
+    "It’s the tool I wanted for myself. I hope it saves you the same headaches it saves me every day.",
+  ],
+  links: [
+    { label: "Soren on X", href: "https://x.com/SorenStarck" },
+    { label: "Soren on GitHub", href: "https://github.com/Soren-Starck" },
+    { label: "Email Soren", href: "mailto:contact@sessionwatcher.com" },
+  ],
+} as const
+
 function liquidGlassNavbarUsage(
   widthBehavior: NavbarWidthBehavior = liquidGlassNavbarExample.widthBehavior
 ) {
@@ -205,8 +225,11 @@ ${links}
 />`
 }
 
-function blueCtaButtonUsage(tone: BlueCtaTone = blueCtaButtonExample.tone) {
-  return `<BlueCtaButton tone="${tone}">\n  ${blueCtaButtonExample.label}\n</BlueCtaButton>`
+function blueCtaButtonUsage(
+  tone: BlueCtaTone = blueCtaButtonExample.tone,
+  platform: BlueCtaPlatform = blueCtaButtonExample.platform
+) {
+  return `<BlueCtaButton tone="${tone}" platform="${platform}">\n  ${blueCtaButtonExample.label}\n</BlueCtaButton>`
 }
 
 const gradientFaqUsage = `<GradientFaq
@@ -342,9 +365,21 @@ const morphingDownloadIconUsage = `const [hovered, setHovered] = useState(false)
   ${morphingDownloadIconExample.label}
 </button>`
 
+const founderNoteUsage = `<FounderNote
+  name="${founderNoteExample.name}"
+  role="${founderNoteExample.role}"
+  avatarSrc="${founderNoteExample.avatarSrc}"
+  paragraphs={${JSON.stringify(founderNoteExample.paragraphs, null, 2).replace(/\n/g, "\n  ")}}
+  links={[
+${founderNoteExample.links.map((link) => `    { label: "${link.label}", href: "${link.href}", icon: <${link.label.split(" ").pop()}Icon /> },`).join("\n")}
+  ]}
+/>`
+
 export {
   blueCtaButtonExample,
   blueCtaButtonUsage,
+  founderNoteExample,
+  founderNoteUsage,
   gradientFaqExample,
   gradientFaqUsage,
   liquidGlassNavbarExample,

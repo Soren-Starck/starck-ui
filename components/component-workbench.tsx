@@ -14,7 +14,10 @@ import {
   liquidGlassNavbarExample,
   liquidGlassNavbarUsage,
 } from "@/lib/examples"
-import type { BlueCtaTone } from "@/registry/default/blue-cta-button"
+import type {
+  BlueCtaPlatform,
+  BlueCtaTone,
+} from "@/registry/default/blue-cta-button"
 import type { NavbarWidthBehavior } from "@/registry/default/liquid-glass-navbar"
 
 type ComponentSource = {
@@ -74,6 +77,39 @@ function ToneControl({
   )
 }
 
+function PlatformControl({
+  value,
+  onChange,
+}: {
+  value: BlueCtaPlatform
+  onChange: (platform: BlueCtaPlatform) => void
+}) {
+  return (
+    <div
+      role="group"
+      aria-label="Button platform"
+      className="inline-flex h-10 items-center rounded-full border border-black/8 bg-background/88 p-1 shadow-[0_8px_28px_-12px_rgba(0,0,0,0.35)] backdrop-blur-xl"
+    >
+      {(
+        [
+          { value: "macos", label: "macOS" },
+          { value: "windows", label: "Windows" },
+        ] as const
+      ).map((option) => (
+        <button
+          key={option.value}
+          type="button"
+          aria-pressed={value === option.value}
+          onClick={() => onChange(option.value)}
+          className="h-8 cursor-pointer rounded-full px-3 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none aria-pressed:bg-foreground aria-pressed:text-background"
+        >
+          {option.label}
+        </button>
+      ))}
+    </div>
+  )
+}
+
 function WidthBehaviorControl({
   value,
   onChange,
@@ -112,11 +148,14 @@ function ComponentWorkbench({
   const [blueCtaTone, setBlueCtaTone] = React.useState<BlueCtaTone>(
     blueCtaButtonExample.tone
   )
+  const [blueCtaPlatform, setBlueCtaPlatform] = React.useState<BlueCtaPlatform>(
+    blueCtaButtonExample.platform
+  )
   const [navbarWidthBehavior, setNavbarWidthBehavior] =
     React.useState<NavbarWidthBehavior>(liquidGlassNavbarExample.widthBehavior)
   const usage =
     slug === "blue-cta-button"
-      ? blueCtaButtonUsage(blueCtaTone)
+      ? blueCtaButtonUsage(blueCtaTone, blueCtaPlatform)
       : slug === "liquid-glass-navbar"
         ? liquidGlassNavbarUsage(navbarWidthBehavior)
         : defaultUsage
@@ -141,10 +180,20 @@ function ComponentWorkbench({
             <ComponentPreview
               slug={slug}
               blueCtaTone={blueCtaTone}
+              blueCtaPlatform={blueCtaPlatform}
               navbarWidthBehavior={navbarWidthBehavior}
               controls={
                 slug === "blue-cta-button" ? (
-                  <ToneControl value={blueCtaTone} onChange={setBlueCtaTone} />
+                  <div className="flex flex-wrap items-center gap-2">
+                    <PlatformControl
+                      value={blueCtaPlatform}
+                      onChange={setBlueCtaPlatform}
+                    />
+                    <ToneControl
+                      value={blueCtaTone}
+                      onChange={setBlueCtaTone}
+                    />
+                  </div>
                 ) : slug === "liquid-glass-navbar" ? (
                   <WidthBehaviorControl
                     value={navbarWidthBehavior}

@@ -53,6 +53,7 @@ function ScaledComponentCardPreview({ slug }: { slug: string }) {
           <ComponentPreview
             slug={slug}
             blueCtaTone={blueCtaButtonExample.tone}
+            blueCtaPlatform={blueCtaButtonExample.platform}
             navbarWidthBehavior={liquidGlassNavbarExample.widthBehavior}
           />
         </div>
