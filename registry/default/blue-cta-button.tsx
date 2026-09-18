@@ -53,7 +53,7 @@ const blueCtaToneStyles = {
   },
 } satisfies Record<BlueCtaTone, BlueCtaToneStyle>
 
-const blueCtaClassName =
+const blueCtaBaseClassName =
   "starck-blue-cta inline-flex cursor-pointer items-center justify-center gap-1.5 px-5 py-2 text-sm font-medium tracking-[-0.022em] whitespace-nowrap text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--starck-blue-cta-glow)/0.6)] focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
 
 // The capsule is an Apple shape: macOS has drawn fully-rounded buttons since
@@ -65,6 +65,10 @@ const blueCtaPlatformClassNames = {
   macos: "rounded-full",
   windows: "rounded-[10px]",
 } satisfies Record<BlueCtaPlatform, string>
+
+// The macOS capsule, for consumers that compose their own button (navbar,
+// sticky bars) and never switch platform.
+const blueCtaClassName = `${blueCtaBaseClassName} ${blueCtaPlatformClassNames.macos}`
 
 const blueCtaStyle = {
   fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
@@ -126,7 +130,7 @@ function BlueCtaButton({
     <button
       type={type}
       className={[
-        blueCtaClassName,
+        blueCtaBaseClassName,
         blueCtaPlatformClassNames[platform],
         className,
       ]
@@ -152,6 +156,7 @@ function BlueCtaButton({
 export {
   AppleMark,
   BlueCtaButton,
+  blueCtaBaseClassName,
   blueCtaClassName,
   blueCtaPlatformClassNames,
   blueCtaPlatforms,
