@@ -92,7 +92,7 @@ function LiquidGlassNavbar({
     layoutEffect: false,
   })
   const animatedWidth = useTransform(scrollY, [0, 400], ["50%", "120%"])
-  const containedWidth = useTransform(scrollY, [0, 320], ["92%", "100%"])
+  const containedWidth = useTransform(scrollY, [0, 320], ["76%", "100%"])
   const mobileNav = React.useRef<HTMLElement>(null)
   const desktopNav = React.useRef<HTMLElement>(null)
 
@@ -180,6 +180,7 @@ function LiquidGlassNavbar({
         aria-label="Main navigation"
         className="hidden max-w-[1200px] rounded-full px-3 py-3 pl-4 backdrop-blur-md sm:block"
         style={{
+          minWidth: contained ? "min(100%, 44rem)" : undefined,
           width:
             widthBehavior === "fixed"
               ? "100%"
