@@ -64,7 +64,10 @@ function DocsShell({ children }: { children: React.ReactNode }) {
           </div>
         </nav>
         <div className="border-t px-5 py-4 text-xs text-muted-foreground">
-          <a href="https://starck.studio" className="hover:text-foreground">
+          <a
+            href="https://starck.studio?ref=ui.starck.studio"
+            className="hover:text-foreground"
+          >
             A STARCK product ↗
           </a>
         </div>
@@ -85,7 +88,7 @@ function DocsShell({ children }: { children: React.ReactNode }) {
                 Components
               </Link>
               <a
-                href="https://starck.studio"
+                href="https://starck.studio?ref=ui.starck.studio"
                 className="text-muted-foreground hover:text-foreground"
               >
                 STARCK ↗

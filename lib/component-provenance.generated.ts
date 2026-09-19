@@ -11,13 +11,13 @@ const componentProvenance = {
   "liquid-glass-navbar": [
     {
       "name": "SessionWatcher",
-      "href": "https://sessionwatcher.com",
+      "href": "https://sessionwatcher.com?ref=ui.starck.studio",
       "iconSrc": "/products/sessionwatcher.png",
       "evidence": "session-watcher-website/components/HomeHeader.tsx"
     },
     {
       "name": "Moorline",
-      "href": "https://moorline.app",
+      "href": "https://moorline.app?ref=ui.starck.studio",
       "iconSrc": "/products/moorline.png",
       "evidence": "moorline-website/src/components/marketing/MoorlineHeader.tsx"
     }
@@ -25,13 +25,13 @@ const componentProvenance = {
   "blue-cta-button": [
     {
       "name": "SessionWatcher",
-      "href": "https://sessionwatcher.com",
+      "href": "https://sessionwatcher.com?ref=ui.starck.studio",
       "iconSrc": "/products/sessionwatcher.png",
       "evidence": "session-watcher-website/components/HomeHeader.tsx"
     },
     {
       "name": "Moorline",
-      "href": "https://moorline.app",
+      "href": "https://moorline.app?ref=ui.starck.studio",
       "iconSrc": "/products/moorline.png",
       "evidence": "moorline-website/src/components/marketing/MoorlineHeader.tsx"
     }
@@ -39,13 +39,13 @@ const componentProvenance = {
   "gradient-faq": [
     {
       "name": "SessionWatcher",
-      "href": "https://sessionwatcher.com",
+      "href": "https://sessionwatcher.com?ref=ui.starck.studio",
       "iconSrc": "/products/sessionwatcher.png",
       "evidence": "session-watcher-website/components/cuicui/GradientFAQ.tsx"
     },
     {
       "name": "Moorline",
-      "href": "https://moorline.app",
+      "href": "https://moorline.app?ref=ui.starck.studio",
       "iconSrc": "/products/moorline.png",
       "evidence": "moorline-website/src/components/cuicui/GradientFAQ.tsx"
     }
@@ -53,7 +53,7 @@ const componentProvenance = {
   "scroll-reveal": [
     {
       "name": "Moorline",
-      "href": "https://moorline.app",
+      "href": "https://moorline.app?ref=ui.starck.studio",
       "iconSrc": "/products/moorline.png",
       "evidence": "moorline-website/src/components/marketing/Reveal.tsx"
     }
@@ -61,7 +61,7 @@ const componentProvenance = {
   "terminal-command": [
     {
       "name": "SessionWatcher",
-      "href": "https://sessionwatcher.com",
+      "href": "https://sessionwatcher.com?ref=ui.starck.studio",
       "iconSrc": "/products/sessionwatcher.png",
       "evidence": "session-watcher-website/components/BrewCommand.tsx"
     }
@@ -69,7 +69,7 @@ const componentProvenance = {
   "macbook-mockup": [
     {
       "name": "SessionWatcher",
-      "href": "https://sessionwatcher.com",
+      "href": "https://sessionwatcher.com?ref=ui.starck.studio",
       "iconSrc": "/products/sessionwatcher.png",
       "evidence": "session-watcher-website/components/MacbookPreview.tsx"
     }
@@ -77,7 +77,7 @@ const componentProvenance = {
   "sticky-product-cta": [
     {
       "name": "SessionWatcher",
-      "href": "https://sessionwatcher.com",
+      "href": "https://sessionwatcher.com?ref=ui.starck.studio",
       "iconSrc": "/products/sessionwatcher.png",
       "evidence": "session-watcher-website/components/StickyBuyBar.tsx"
     }
@@ -85,7 +85,7 @@ const componentProvenance = {
   "social-proof": [
     {
       "name": "SessionWatcher",
-      "href": "https://sessionwatcher.com",
+      "href": "https://sessionwatcher.com?ref=ui.starck.studio",
       "iconSrc": "/products/sessionwatcher.png",
       "evidence": "session-watcher-website/components/SocialProof.tsx"
     }
@@ -93,7 +93,7 @@ const componentProvenance = {
   "testimonials-grid": [
     {
       "name": "SessionWatcher",
-      "href": "https://sessionwatcher.com",
+      "href": "https://sessionwatcher.com?ref=ui.starck.studio",
       "iconSrc": "/products/sessionwatcher.png",
       "evidence": "session-watcher-website/components/Testimonials.tsx"
     }
@@ -101,7 +101,7 @@ const componentProvenance = {
   "whats-new-card": [
     {
       "name": "SessionWatcher",
-      "href": "https://sessionwatcher.com",
+      "href": "https://sessionwatcher.com?ref=ui.starck.studio",
       "iconSrc": "/products/sessionwatcher.png",
       "evidence": "session-watcher-website/components/WhatsNewCard.tsx"
     }
@@ -109,7 +109,7 @@ const componentProvenance = {
   "release-history-dialog": [
     {
       "name": "SessionWatcher",
-      "href": "https://sessionwatcher.com",
+      "href": "https://sessionwatcher.com?ref=ui.starck.studio",
       "iconSrc": "/products/sessionwatcher.png",
       "evidence": "session-watcher-website/components/ReleaseHistoryDialog.tsx"
     }
@@ -117,7 +117,7 @@ const componentProvenance = {
   "single-pricing-card": [
     {
       "name": "SessionWatcher",
-      "href": "https://sessionwatcher.com",
+      "href": "https://sessionwatcher.com?ref=ui.starck.studio",
       "iconSrc": "/products/sessionwatcher.png",
       "evidence": "session-watcher-website/components/ToolPricingCard.tsx"
     }
@@ -125,13 +125,13 @@ const componentProvenance = {
   "pricing-block": [
     {
       "name": "SessionWatcher",
-      "href": "https://sessionwatcher.com",
+      "href": "https://sessionwatcher.com?ref=ui.starck.studio",
       "iconSrc": "/products/sessionwatcher.png",
       "evidence": "session-watcher-website/__tests__/ai-coding-tool-usage.test.mjs"
     },
     {
       "name": "Moorline",
-      "href": "https://moorline.app",
+      "href": "https://moorline.app?ref=ui.starck.studio",
       "iconSrc": "/products/moorline.png",
       "evidence": "moorline-website/src/components/marketing/PricingTrust.tsx"
     }
@@ -139,7 +139,7 @@ const componentProvenance = {
   "provider-orbit": [
     {
       "name": "Moorline",
-      "href": "https://moorline.app",
+      "href": "https://moorline.app?ref=ui.starck.studio",
       "iconSrc": "/products/moorline.png",
       "evidence": "moorline-website/src/components/marketing/ProviderOrbit.tsx"
     }
@@ -147,7 +147,7 @@ const componentProvenance = {
   "morphing-download-icon": [
     {
       "name": "SessionWatcher",
-      "href": "https://sessionwatcher.com",
+      "href": "https://sessionwatcher.com?ref=ui.starck.studio",
       "iconSrc": "/products/sessionwatcher.png",
       "evidence": "session-watcher-website/components/MorphingDownloadIcon.tsx"
     }
@@ -155,13 +155,13 @@ const componentProvenance = {
   "founder-note": [
     {
       "name": "SessionWatcher",
-      "href": "https://sessionwatcher.com",
+      "href": "https://sessionwatcher.com?ref=ui.starck.studio",
       "iconSrc": "/products/sessionwatcher.png",
       "evidence": "session-watcher-website/components/FounderNote.tsx"
     },
     {
       "name": "Moorline",
-      "href": "https://moorline.app",
+      "href": "https://moorline.app?ref=ui.starck.studio",
       "iconSrc": "/products/moorline.png",
       "evidence": "moorline-website/src/components/marketing/Closing.tsx"
     }
