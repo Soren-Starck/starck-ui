@@ -27,16 +27,10 @@ function DocsShell({ children }: { children: React.ReactNode }) {
         <nav className="flex-1 space-y-7 overflow-y-auto px-3 py-5 text-sm">
           <div className="space-y-1">
             <Link
-              href="/"
-              className="block rounded-lg px-3 py-2 transition-colors hover:bg-sidebar-accent"
-            >
-              Overview
-            </Link>
-            <Link
-              href="/guide"
+              href="/getting-started"
               className="block rounded-lg px-3 py-2 text-muted-foreground transition-colors hover:bg-sidebar-accent hover:text-foreground"
             >
-              Usage
+              Getting started
             </Link>
           </div>
           <div>

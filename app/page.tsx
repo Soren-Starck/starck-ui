@@ -29,10 +29,10 @@ export default function Page() {
             Browse components
           </Link>
           <Link
-            href="/guide"
+            href="/getting-started"
             className={cn(buttonVariants({ variant: "ghost" }), "rounded-full")}
           >
-            Usage
+            Getting started
           </Link>
         </div>
       </section>
