@@ -49,10 +49,7 @@ export default async function ComponentPage({ params }: Props) {
   return (
     <main className="mx-auto max-w-5xl px-5 py-12 sm:px-8 sm:py-16">
       <div>
-        <p className="text-xs font-medium tracking-[0.08em] text-muted-foreground uppercase">
-          Component
-        </p>
-        <h1 className="mt-3 text-4xl font-semibold tracking-[-0.035em]">
+        <h1 className="text-4xl font-semibold tracking-[-0.035em]">
           {component.title}
         </h1>
         <p className="mt-4 max-w-2xl text-base leading-7 text-muted-foreground">
