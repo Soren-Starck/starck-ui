@@ -127,7 +127,7 @@ const componentProvenance = {
       "name": "SessionWatcher",
       "href": "https://sessionwatcher.com?ref=ui.starck.studio",
       "iconSrc": "/products/sessionwatcher.png",
-      "evidence": "session-watcher-website/__tests__/ai-coding-tool-usage.test.mjs"
+      "evidence": "session-watcher-website/components/HomePricing.tsx"
     },
     {
       "name": "Moorline",
