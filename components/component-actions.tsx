@@ -10,6 +10,7 @@ import { HugeiconsIcon } from "@hugeicons/react"
 
 import { Button } from "@/components/ui/button"
 import { copyToClipboard } from "@/lib/copy-to-clipboard"
+import { getInstallCommand } from "@/lib/install-command"
 
 type ComponentActionsProps = {
   slug: string
@@ -25,7 +26,7 @@ function ComponentActions({
   usage,
 }: ComponentActionsProps) {
   const [copied, setCopied] = React.useState<"command" | "prompt" | null>(null)
-  const installCommand = `pnpm dlx shadcn@latest add https://ui.starck.studio/r/${slug}.json`
+  const installCommand = getInstallCommand(slug)
   const prompt = `Implement the STARCK UI ${title} in this project.
 
 Component: ${description}

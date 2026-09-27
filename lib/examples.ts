@@ -52,10 +52,7 @@ const scrollRevealExample = {
 
 const terminalCommandExample = {
   shell: "zsh",
-  lines: [
-    "pnpm dlx shadcn@latest add https://ui.starck.studio/r/terminal-command.json",
-    "pnpm dev",
-  ],
+  lines: ["pnpm dlx shadcn@latest add @starck/terminal-command", "pnpm dev"],
 } as const
 
 const macbookMockupExample = {

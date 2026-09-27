@@ -1,4 +1,5 @@
 import { components } from "@/lib/components"
+import { getInstallCommand } from "@/lib/install-command"
 
 export const dynamic = "force-static"
 
@@ -6,7 +7,7 @@ export function GET() {
   const entries = components
     .map(
       (component) =>
-        `## ${component.title}\n${component.description}\nInstall: pnpm dlx shadcn@latest add https://ui.starck.studio/r/${component.slug}.json\nDocs: https://ui.starck.studio/components/${component.slug}`
+        `## ${component.title}\n${component.description}\nInstall: ${getInstallCommand(component.slug)}\nDocs: https://ui.starck.studio/components/${component.slug}`
     )
     .join("\n\n")
 

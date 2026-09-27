@@ -1,7 +1,8 @@
 import { CopyButton } from "@/components/copy-button"
+import { getInstallCommand } from "@/lib/install-command"
 
 function InstallCommand({ slug }: { slug: string }) {
-  const command = `pnpm dlx shadcn@latest add https://ui.starck.studio/r/${slug}.json`
+  const command = getInstallCommand(slug)
 
   return (
     <div className="flex min-w-0 items-center gap-3 rounded-xl border bg-muted/55 p-2 pl-4">

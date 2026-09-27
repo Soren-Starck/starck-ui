@@ -25,8 +25,11 @@ after it proves useful.
 Add the source directly to an existing shadcn project:
 
 ```sh
-pnpm dlx shadcn@latest add https://ui.starck.studio/r/liquid-glass-navbar.json
+pnpm dlx shadcn@latest add @starck/liquid-glass-navbar
 ```
+
+STARCK UI is listed in the [shadcn registry directory](https://ui.shadcn.com/docs/directory),
+so the CLI resolves the `@starck` namespace with no extra configuration.
 
 The component becomes part of your codebase. Change it, restyle it, and make it
 yours.

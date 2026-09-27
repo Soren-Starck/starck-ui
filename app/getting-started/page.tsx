@@ -26,6 +26,19 @@ export default function GettingStartedPage() {
       <section className="mt-10 space-y-4">
         <h2 className="text-lg font-medium">2. Add one component</h2>
         <InstallCommand slug="blue-cta-button" />
+        <p className="text-sm leading-6 text-muted-foreground">
+          STARCK UI is listed in the{" "}
+          <a
+            href="https://ui.shadcn.com/docs/directory"
+            target="_blank"
+            rel="noreferrer"
+            className="font-medium text-foreground underline-offset-4 hover:underline"
+          >
+            shadcn registry directory ↗
+          </a>
+          , so the CLI resolves <code className="font-mono">@starck</code> with
+          no extra setup.
+        </p>
       </section>
 
       <section className="mt-10 space-y-3">
