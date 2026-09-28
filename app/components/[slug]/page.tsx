@@ -7,6 +7,7 @@ import { notFound } from "next/navigation"
 import { ComponentWorkbench } from "@/components/component-workbench"
 import { getComponentProvenance } from "@/lib/component-provenance.generated"
 import { components, getComponent } from "@/lib/components"
+import { jsonLd, repoUrl, siteName, siteUrl } from "@/lib/site"
 
 type Props = {
   params: Promise<{ slug: string }>
@@ -20,9 +21,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const component = getComponent((await params).slug)
   if (!component) return {}
 
+  const title = `${component.title} for shadcn/ui`
+  const url = `/components/${component.slug}`
   return {
-    title: component.title,
+    title,
     description: component.description,
+    alternates: { canonical: url },
+    openGraph: {
+      title,
+      description: component.description,
+      url: `${siteUrl}${url}`,
+      siteName,
+      type: "website",
+    },
   }
 }
 
@@ -46,8 +57,30 @@ export default async function ComponentPage({ params }: Props) {
     }))
   )
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareSourceCode",
+    name: component.title,
+    description: component.description,
+    url: `${siteUrl}/components/${component.slug}`,
+    codeRepository: repoUrl,
+    programmingLanguage: ["TypeScript", "React"],
+    runtimePlatform: "React",
+    license: "https://opensource.org/licenses/MIT",
+    author: {
+      "@type": "Person",
+      name: "Soren Starck",
+      url: "https://starck.studio",
+    },
+    isPartOf: { "@type": "WebSite", name: siteName, url: siteUrl },
+  }
+
   return (
     <main className="mx-auto max-w-5xl px-5 py-12 sm:px-8 sm:py-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={jsonLd(structuredData)}
+      />
       <div>
         <h1 className="text-4xl font-semibold tracking-[-0.035em]">
           {component.title}

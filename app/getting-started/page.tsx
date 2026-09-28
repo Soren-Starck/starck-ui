@@ -1,7 +1,14 @@
+import type { Metadata } from "next"
+
 import { InstallCommand } from "@/components/install-command"
 import { Separator } from "@/components/ui/separator"
 
-export const metadata = { title: "Getting started" }
+export const metadata: Metadata = {
+  title: "Getting started",
+  description:
+    "Add STARCK UI to a shadcn/ui project: initialize shadcn, then install one component from the @starck registry and own its source.",
+  alternates: { canonical: "/getting-started" },
+}
 
 export default function GettingStartedPage() {
   return (

@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import Link from "next/link"
 import { ArrowUpRight01Icon } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
@@ -7,11 +8,54 @@ import { Badge } from "@/components/ui/badge"
 import { buttonVariants } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { components } from "@/lib/components"
+import { jsonLd, repoUrl, siteName, siteUrl } from "@/lib/site"
 import { cn } from "@/lib/utils"
+
+const description = `Open-source shadcn/ui components taken from products that shipped, like SessionWatcher and Moorline. ${components.length} components, installable with the shadcn CLI.`
+
+export const metadata: Metadata = {
+  title: { absolute: "STARCK UI: shadcn/ui components from shipped products" },
+  description,
+  alternates: { canonical: "/" },
+  openGraph: {
+    title: "STARCK UI",
+    description,
+    url: siteUrl,
+    siteName,
+    type: "website",
+  },
+}
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    { "@type": "WebSite", name: siteName, url: siteUrl, description },
+    {
+      "@type": "ItemList",
+      name: "STARCK UI components",
+      itemListElement: components.map((component, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        url: `${siteUrl}/components/${component.slug}`,
+        name: component.title,
+      })),
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      name: siteName,
+      codeRepository: repoUrl,
+      license: "https://opensource.org/licenses/MIT",
+    },
+  ],
+}
 
 export default function Page() {
   return (
     <main className="mx-auto max-w-5xl px-5 py-16 sm:px-8 sm:py-24">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={jsonLd(structuredData)}
+      />
       <section className="max-w-3xl">
         <Badge variant="outline">Open source</Badge>
         <h1 className="mt-6 text-4xl font-semibold tracking-[-0.04em] text-balance sm:text-6xl">

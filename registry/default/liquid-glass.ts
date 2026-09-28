@@ -1,5 +1,5 @@
 /**
- * Liquid Glass — optical refraction for the web.
+ * Liquid Glass: optical refraction for the web.
  * Adapted from https://github.com/rizzytoday/liquid-glass
  * Chromium uses SVG displacement; other browsers receive backdrop blur.
  *
