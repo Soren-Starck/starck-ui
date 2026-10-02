@@ -30,7 +30,6 @@ type ComponentWorkbenchProps = {
   title: string
   description: string
   defaultUsage: string
-  installNote: string
   sources: readonly ComponentSource[]
 }
 
@@ -144,7 +143,6 @@ function ComponentWorkbench({
   title,
   description,
   defaultUsage,
-  installNote,
   sources,
 }: ComponentWorkbenchProps) {
   const [blueCtaTone, setBlueCtaTone] = React.useState<BlueCtaTone>(
@@ -235,7 +233,7 @@ function ComponentWorkbench({
       <section>
         <h2 className="text-lg font-medium">Install</h2>
         <p className="mt-2 mb-4 text-sm text-muted-foreground">
-          Add the source directly to your shadcn project. {installNote}
+          Add the source directly to your shadcn project.
         </p>
         <InstallCommand slug={slug} />
       </section>

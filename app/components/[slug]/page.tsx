@@ -4,22 +4,14 @@ import type { Metadata } from "next"
 import Image from "next/image"
 import { notFound } from "next/navigation"
 
-import { ComponentDocs, InlineText } from "@/components/component-docs"
 import { ComponentWorkbench } from "@/components/component-workbench"
 import { getComponentProvenance } from "@/lib/component-provenance.generated"
 import { components, getComponent } from "@/lib/components"
-import { stripInlineCode } from "@/lib/inline-code"
-import { describeDependencies } from "@/lib/registry-dependencies"
 import { jsonLd, repoUrl, siteName, siteUrl } from "@/lib/site"
 
 type Props = {
   params: Promise<{ slug: string }>
 }
-
-const updatedFormat = new Intl.DateTimeFormat("en-US", {
-  dateStyle: "long",
-  timeZone: "UTC",
-})
 
 export function generateStaticParams() {
   return components.map(({ slug }) => ({ slug }))
@@ -65,40 +57,22 @@ export default async function ComponentPage({ params }: Props) {
     }))
   )
 
-  const pageUrl = `${siteUrl}/components/${component.slug}`
   const structuredData = {
     "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "SoftwareSourceCode",
-        name: component.title,
-        description: stripInlineCode(component.summary),
-        url: pageUrl,
-        codeRepository: repoUrl,
-        programmingLanguage: ["TypeScript", "React"],
-        runtimePlatform: "React",
-        license: "https://opensource.org/licenses/MIT",
-        dateModified: component.updated,
-        author: {
-          "@type": "Person",
-          name: "Soren Starck",
-          url: "https://starck.studio",
-        },
-        isPartOf: { "@type": "WebSite", name: siteName, url: siteUrl },
-      },
-      {
-        "@type": "FAQPage",
-        url: pageUrl,
-        mainEntity: component.faqs.map((faq) => ({
-          "@type": "Question",
-          name: stripInlineCode(faq.question),
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: stripInlineCode(faq.answer),
-          },
-        })),
-      },
-    ],
+    "@type": "SoftwareSourceCode",
+    name: component.title,
+    description: component.description,
+    url: `${siteUrl}/components/${component.slug}`,
+    codeRepository: repoUrl,
+    programmingLanguage: ["TypeScript", "React"],
+    runtimePlatform: "React",
+    license: "https://opensource.org/licenses/MIT",
+    author: {
+      "@type": "Person",
+      name: "Soren Starck",
+      url: "https://starck.studio",
+    },
+    isPartOf: { "@type": "WebSite", name: siteName, url: siteUrl },
   }
 
   return (
@@ -112,50 +86,42 @@ export default async function ComponentPage({ params }: Props) {
           {component.title}
         </h1>
         <p className="mt-4 max-w-2xl text-base leading-7 text-muted-foreground">
-          <InlineText text={component.summary} />
+          {component.description}
         </p>
-        <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
-          {provenance.length > 0 ? (
-            <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-              <span className="text-muted-foreground">Used in</span>
-              {provenance.map((project, index) => (
-                <span
-                  key={project.href}
-                  className="inline-flex items-center gap-2"
+        {provenance.length > 0 ? (
+          <div className="mt-5 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
+            <span className="text-muted-foreground">Used in</span>
+            {provenance.map((project, index) => (
+              <span
+                key={project.href}
+                className="inline-flex items-center gap-2"
+              >
+                {index > 0 ? (
+                  <span aria-hidden="true" className="text-border">
+                    ·
+                  </span>
+                ) : null}
+                <a
+                  href={project.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1.5 font-medium underline-offset-4 hover:underline"
                 >
-                  {index > 0 ? (
-                    <span aria-hidden="true" className="text-border">
-                      ·
-                    </span>
+                  {project.iconSrc ? (
+                    <Image
+                      src={project.iconSrc}
+                      alt=""
+                      width={16}
+                      height={16}
+                      className="size-4 rounded-[4px]"
+                    />
                   ) : null}
-                  <a
-                    href={project.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-1.5 font-medium underline-offset-4 hover:underline"
-                  >
-                    {project.iconSrc ? (
-                      <Image
-                        src={project.iconSrc}
-                        alt=""
-                        width={16}
-                        height={16}
-                        className="size-4 rounded-[4px]"
-                      />
-                    ) : null}
-                    <span>{project.name} ↗</span>
-                  </a>
-                </span>
-              ))}
-            </div>
-          ) : null}
-          <p className="text-muted-foreground">
-            Updated{" "}
-            <time dateTime={component.updated}>
-              {updatedFormat.format(new Date(`${component.updated}T00:00:00Z`))}
-            </time>
-          </p>
-        </div>
+                  <span>{project.name} ↗</span>
+                </a>
+              </span>
+            ))}
+          </div>
+        ) : null}
       </div>
 
       <ComponentWorkbench
@@ -163,11 +129,8 @@ export default async function ComponentPage({ params }: Props) {
         title={component.title}
         description={component.description}
         defaultUsage={component.usage}
-        installNote={describeDependencies(component.slug)}
         sources={sources}
       />
-
-      <ComponentDocs component={component} />
     </main>
   )
 }
