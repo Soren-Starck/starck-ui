@@ -13,6 +13,24 @@ type Props = {
   params: Promise<{ slug: string }>
 }
 
+const liquidGlassNavbarFaq = [
+  {
+    question: "Is there a shadcn liquid glass navbar component for React?",
+    answer:
+      "Yes. STARCK UI ships the Liquid Glass Navbar as React source through its shadcn registry.",
+  },
+  {
+    question: "What does the Liquid Glass Navbar include?",
+    answer:
+      "It renders responsive mobile and desktop navigation, accepts brand, logo, links and CTA props, and supports expandable or fixed desktop width.",
+  },
+  {
+    question: "What happens outside Chromium browsers?",
+    answer:
+      "The component uses a backdrop-blur fallback when its Chromium SVG refraction filter is not active.",
+  },
+] as const
+
 export function generateStaticParams() {
   return components.map(({ slug }) => ({ slug }))
 }
@@ -74,12 +92,27 @@ export default async function ComponentPage({ params }: Props) {
     },
     isPartOf: { "@type": "WebSite", name: siteName, url: siteUrl },
   }
+  const pageStructuredData =
+    component.slug === "liquid-glass-navbar"
+      ? [
+          structuredData,
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: liquidGlassNavbarFaq.map((item) => ({
+              "@type": "Question",
+              name: item.question,
+              acceptedAnswer: { "@type": "Answer", text: item.answer },
+            })),
+          },
+        ]
+      : structuredData
 
   return (
     <main className="mx-auto max-w-5xl px-5 py-12 sm:px-8 sm:py-16">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={jsonLd(structuredData)}
+        dangerouslySetInnerHTML={jsonLd(pageStructuredData)}
       />
       <div>
         <h1 className="text-4xl font-semibold tracking-[-0.035em]">
@@ -88,6 +121,34 @@ export default async function ComponentPage({ params }: Props) {
         <p className="mt-4 max-w-2xl text-base leading-7 text-muted-foreground">
           {component.description}
         </p>
+        {component.slug === "liquid-glass-navbar" ? (
+          <section className="mt-8 max-w-3xl space-y-5 text-sm leading-6 text-muted-foreground">
+            <p>
+              Yes. STARCK UI ships a shadcn-compatible Liquid Glass Navbar for React as source you add to your project. It renders separate responsive mobile and desktop navigation, with a brand, optional version, logo, CTA, and desktop links.
+            </p>
+            <p>
+              The desktop navbar can use expandable or fixed width. When reduced motion is preferred, its expandable desktop width resolves to a fixed width instead of using the scroll-driven width transform.
+            </p>
+            <p>
+              The glass effect uses an SVG displacement filter in Chromium. In other browsers the source applies a backdrop blur fallback. Both rendered navigation elements have the accessible name “Main navigation”; the example keeps the preview and Usage code on the same canonical data.
+            </p>
+            <p>
+              Install it with the component page command, then pass only the props your product needs. The documentation preview and Usage code use liquidGlassNavbarExample, whose width behavior starts as expandable. The registry source owns independent prop defaults.
+            </p>
+            <p className="text-xs">Updated October 5, 2026. Provenance: used in SessionWatcher and Moorline, as recorded in the generated component provenance.</p>
+            <div>
+              <h2 className="text-lg font-medium text-foreground">FAQ</h2>
+              <dl className="mt-3 space-y-4">
+                {liquidGlassNavbarFaq.map((item) => (
+                  <div key={item.question}>
+                    <dt className="font-medium text-foreground">{item.question}</dt>
+                    <dd className="mt-1">{item.answer}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </section>
+        ) : null}
         {provenance.length > 0 ? (
           <div className="mt-5 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
             <span className="text-muted-foreground">Used in</span>
