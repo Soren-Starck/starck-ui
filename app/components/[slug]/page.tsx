@@ -31,6 +31,24 @@ const liquidGlassNavbarFaq = [
   },
 ] as const
 
+const macbookMockupFaq = [
+  {
+    question: "What can I place inside the React MacBook mockup?",
+    answer:
+      "The required children prop accepts any React node, so the screen can contain an image, screenshot, video, or rendered landing-page interface.",
+  },
+  {
+    question: "How does the optional fullscreen preview behave?",
+    answer:
+      "Fullscreen is enabled by default through the expandable prop. The dialog moves focus to its close button, contains Tab focus, closes with Escape or a backdrop click, locks body scrolling while open, and restores focus to the trigger when it closes.",
+  },
+  {
+    question: "What frame and aspect ratio does MacBook Mockup use?",
+    answer:
+      "The default frameSrc is https://ui.starck.studio/preview/macbook-frame.webp. The wrapper uses a responsive 1792:1165 aspect ratio, full available width, and a maximum width of 4xl.",
+  },
+] as const
+
 export function generateStaticParams() {
   return components.map(({ slug }) => ({ slug }))
 }
@@ -106,7 +124,20 @@ export default async function ComponentPage({ params }: Props) {
             })),
           },
         ]
-      : structuredData
+      : component.slug === "macbook-mockup"
+        ? [
+            structuredData,
+            {
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              mainEntity: macbookMockupFaq.map((item) => ({
+                "@type": "Question",
+                name: item.question,
+                acceptedAnswer: { "@type": "Answer", text: item.answer },
+              })),
+            },
+          ]
+        : structuredData
 
   return (
     <main className="mx-auto max-w-5xl px-5 py-12 sm:px-8 sm:py-16">
@@ -118,9 +149,70 @@ export default async function ComponentPage({ params }: Props) {
         <h1 className="text-4xl font-semibold tracking-[-0.035em]">
           {component.title}
         </h1>
-        <p className="mt-4 max-w-2xl text-base leading-7 text-muted-foreground">
-          {component.description}
-        </p>
+        {component.slug === "macbook-mockup" ? (
+          <p className="mt-4 max-w-3xl text-base leading-7 text-muted-foreground">
+            STARCK UI&apos;s MacBook Mockup is a shadcn-compatible React frame for placing arbitrary landing-page content or screenshots inside a MacBook shell. Pass that content as <code>children</code>; the frame keeps a responsive 1792:1165 aspect ratio and can open an optional fullscreen dialog.
+          </p>
+        ) : (
+          <p className="mt-4 max-w-2xl text-base leading-7 text-muted-foreground">
+            {component.description}
+          </p>
+        )}
+        {component.slug === "macbook-mockup" ? (
+          <section className="mt-8 max-w-3xl space-y-7 text-sm leading-6 text-muted-foreground">
+            <div>
+              <h2 className="text-lg font-medium text-foreground">Props and responsive frame</h2>
+              <dl className="mt-3 space-y-3">
+                <div>
+                  <dt className="font-medium text-foreground"><code>children: ReactNode</code></dt>
+                  <dd>Required screen content, rendered inside an overflow-hidden inset behind the frame image.</dd>
+                </div>
+                <div>
+                  <dt className="font-medium text-foreground"><code>className?: string</code></dt>
+                  <dd>Appended to the outer relative wrapper. The default is an empty string.</dd>
+                </div>
+                <div>
+                  <dt className="font-medium text-foreground"><code>expandable?: boolean</code></dt>
+                  <dd>Defaults to <code>true</code>. Set it to <code>false</code> to omit the fullscreen trigger and dialog.</dd>
+                </div>
+                <div>
+                  <dt className="font-medium text-foreground"><code>frameSrc?: string</code></dt>
+                  <dd>Defaults to <code className="break-all">https://ui.starck.studio/preview/macbook-frame.webp</code>.</dd>
+                </div>
+                <div>
+                  <dt className="font-medium text-foreground"><code>label?: string</code></dt>
+                  <dd>Defaults to <code>Open fullscreen preview</code> and labels both the trigger and dialog.</dd>
+                </div>
+              </dl>
+              <p className="mt-4">
+                The frame wrapper is full width up to <code>max-w-4xl</code> and uses <code>aspect-[1792/1165]</code>. The screen content is clipped to proportional insets, while the decorative frame image fills the wrapper with <code>object-contain</code>.
+              </p>
+            </div>
+
+            <div>
+              <h2 className="text-lg font-medium text-foreground">Fullscreen keyboard and focus behavior</h2>
+              <p className="mt-3">
+                When fullscreen opens, the source portals a modal dialog to <code>document.body</code>, saves the trigger, moves focus to the close button on the next animation frame, and sets body overflow to hidden. Its key handler closes on Escape and cycles Tab focus between focusable controls inside the dialog. Cleanup restores the previous body overflow and returns focus to the trigger. Clicking the backdrop closes the dialog; clicking the framed content does not.
+              </p>
+            </div>
+
+            <p className="text-xs">
+              Updated October 6, 2026. The preview and Usage output use the shared <code>macbookMockupExample</code> values. Generated provenance records the component in SessionWatcher at <code>session-watcher-website/components/MacbookPreview.tsx</code>.
+            </p>
+
+            <div>
+              <h2 className="text-lg font-medium text-foreground">FAQ</h2>
+              <dl className="mt-3 space-y-4">
+                {macbookMockupFaq.map((item) => (
+                  <div key={item.question}>
+                    <dt className="font-medium text-foreground">{item.question}</dt>
+                    <dd className="mt-1">{item.answer}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </section>
+        ) : null}
         {component.slug === "liquid-glass-navbar" ? (
           <section className="mt-8 max-w-3xl space-y-5 text-sm leading-6 text-muted-foreground">
             <p>
