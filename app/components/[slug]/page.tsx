@@ -40,7 +40,7 @@ const macbookMockupFaq = [
   {
     question: "How does the optional fullscreen preview behave?",
     answer:
-      "Fullscreen is enabled by default through the expandable prop. The dialog moves focus to its close button, contains Tab focus, closes with Escape or a backdrop click, locks body scrolling while open, and restores focus to the trigger when it closes.",
+      "Fullscreen is enabled by default through the expandable prop. The dialog moves focus to its close button, closes with Escape or a backdrop click, locks body scrolling while open, and restores focus to the trigger when it closes. It does not fully contain Tab focus: its selector covers enabled buttons and elements with an explicit tabindex other than -1, but omits native links, inputs, selects and textareas without an explicit tabindex. Interactive ReactNode children can therefore let focus leave the dialog.",
   },
   {
     question: "What frame and aspect ratio does MacBook Mockup use?",
@@ -192,12 +192,12 @@ export default async function ComponentPage({ params }: Props) {
             <div>
               <h2 className="text-lg font-medium text-foreground">Fullscreen keyboard and focus behavior</h2>
               <p className="mt-3">
-                When fullscreen opens, the source portals a modal dialog to <code>document.body</code>, saves the trigger, moves focus to the close button on the next animation frame, and sets body overflow to hidden. Its key handler closes on Escape and cycles Tab focus between focusable controls inside the dialog. Cleanup restores the previous body overflow and returns focus to the trigger. Clicking the backdrop closes the dialog; clicking the framed content does not.
+                When fullscreen opens, the source portals an <code>aria-modal</code> dialog to <code>document.body</code>, saves the trigger, moves focus to the close button on the next animation frame, and sets body overflow to hidden. Its focus selector is <code>button:not([disabled]), [tabindex]:not([tabindex=&quot;-1&quot;])</code>. That covers enabled buttons and elements with an explicit <code>tabindex</code> other than <code>-1</code>, but omits native links, inputs, selects and textareas without an explicit <code>tabindex</code>. Because <code>children</code> accepts any <code>ReactNode</code>, those interactive children can let focus leave the dialog. The key handler closes on Escape. Cleanup restores the previous body overflow and returns focus to the trigger. Clicking the backdrop closes the dialog; clicking the framed content does not.
               </p>
             </div>
 
             <p className="text-xs">
-              Updated October 6, 2026. The preview and Usage output use the shared <code>macbookMockupExample</code> values. Generated provenance records the component in SessionWatcher at <code>session-watcher-website/components/MacbookPreview.tsx</code>.
+              Updated October 7, 2026. The preview and Usage output use the shared <code>macbookMockupExample</code> values. Generated provenance records the component in SessionWatcher at <code>session-watcher-website/components/MacbookPreview.tsx</code>.
             </p>
 
             <div>
