@@ -49,6 +49,24 @@ const macbookMockupFaq = [
   },
 ] as const
 
+const terminalCommandFaq = [
+  {
+    question: "How does Terminal Command copy multiple commands?",
+    answer:
+      "It joins the required lines array with newline characters and passes that string to navigator.clipboard.writeText. A successful copy shows Copied for 1.8 seconds; a failed copy leaves the state as Copy.",
+  },
+  {
+    question: "What are the Terminal Command props and defaults?",
+    answer:
+      "lines is a required readonly string array. shell is optional and defaults to zsh; className is optional and defaults to an empty string.",
+  },
+  {
+    question: "Is the Copied status announced to screen readers?",
+    answer:
+      "The button's aria-label remains Copy commands, and the visual Copy or Copied status is not an aria-live announcement in the current source.",
+  },
+] as const
+
 export function generateStaticParams() {
   return components.map(({ slug }) => ({ slug }))
 }
@@ -137,7 +155,20 @@ export default async function ComponentPage({ params }: Props) {
               })),
             },
           ]
-        : structuredData
+        : component.slug === "terminal-command"
+          ? [
+              structuredData,
+              {
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                mainEntity: terminalCommandFaq.map((item) => ({
+                  "@type": "Question",
+                  name: item.question,
+                  acceptedAnswer: { "@type": "Answer", text: item.answer },
+                })),
+              },
+            ]
+          : structuredData
 
   return (
     <main className="mx-auto max-w-5xl px-5 py-12 sm:px-8 sm:py-16">
@@ -152,6 +183,10 @@ export default async function ComponentPage({ params }: Props) {
         {component.slug === "macbook-mockup" ? (
           <p className="mt-4 max-w-3xl text-base leading-7 text-muted-foreground">
             STARCK UI&apos;s MacBook Mockup is a shadcn-compatible React frame for placing arbitrary landing-page content or screenshots inside a MacBook shell. Pass that content as <code>children</code>; the frame keeps a responsive 1792:1165 aspect ratio and can open an optional fullscreen dialog.
+          </p>
+        ) : component.slug === "terminal-command" ? (
+          <p className="mt-4 max-w-3xl text-base leading-7 text-muted-foreground">
+            STARCK UI&apos;s Terminal Command is a shadcn-compatible React component that displays terminal command lines with a copy button. Pass the required <code>lines</code> array; it renders a shell label, a horizontally scrollable command region, and visual copy feedback.
           </p>
         ) : (
           <p className="mt-4 max-w-2xl text-base leading-7 text-muted-foreground">
@@ -232,6 +267,53 @@ export default async function ComponentPage({ params }: Props) {
               <h2 className="text-lg font-medium text-foreground">FAQ</h2>
               <dl className="mt-3 space-y-4">
                 {liquidGlassNavbarFaq.map((item) => (
+                  <div key={item.question}>
+                    <dt className="font-medium text-foreground">{item.question}</dt>
+                    <dd className="mt-1">{item.answer}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </section>
+        ) : null}
+        {component.slug === "terminal-command" ? (
+          <section className="mt-8 max-w-3xl space-y-7 text-sm leading-6 text-muted-foreground">
+            <div>
+              <h2 className="text-lg font-medium text-foreground">Props and defaults</h2>
+              <dl className="mt-3 space-y-3">
+                <div>
+                  <dt className="font-medium text-foreground"><code>lines: readonly string[]</code></dt>
+                  <dd>Required. Each string renders as one command, and copying joins the strings with newline characters.</dd>
+                </div>
+                <div>
+                  <dt className="font-medium text-foreground"><code>shell?: string</code></dt>
+                  <dd>Optional shell label. The default is <code>zsh</code>.</dd>
+                </div>
+                <div>
+                  <dt className="font-medium text-foreground"><code>className?: string</code></dt>
+                  <dd>Appended to the outer wrapper. The default is an empty string.</dd>
+                </div>
+              </dl>
+            </div>
+
+            <div>
+              <h2 className="text-lg font-medium text-foreground">Copy and overflow behavior</h2>
+              <p className="mt-3">
+                The button calls <code className="break-all">navigator.clipboard.writeText(lines.join(&quot;\n&quot;))</code>. Success changes the visible state from <code>Copy</code> to <code>Copied</code> for 1.8 seconds. If writing to the Clipboard API fails, the state remains <code>Copy</code>. The button&apos;s <code>aria-label</code> remains <code>Copy commands</code> in both visual states, and the current source does not add an <code>aria-live</code> announcement.
+              </p>
+              <p className="mt-3">
+                Command lines use <code>whitespace-pre</code> inside an <code>overflow-x-auto</code> region, so long lines stay on one line and scroll horizontally.
+              </p>
+            </div>
+
+            <p className="text-xs">
+              Updated October 8, 2026. The documentation preview and Usage output use the shared <code>terminalCommandExample</code> values: the <code>zsh</code> shell label and the same two command lines.
+            </p>
+
+            <div>
+              <h2 className="text-lg font-medium text-foreground">FAQ</h2>
+              <dl className="mt-3 space-y-4">
+                {terminalCommandFaq.map((item) => (
                   <div key={item.question}>
                     <dt className="font-medium text-foreground">{item.question}</dt>
                     <dd className="mt-1">{item.answer}</dd>
