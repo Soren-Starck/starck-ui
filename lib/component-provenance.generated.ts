@@ -27,7 +27,7 @@ const componentProvenance = {
       "name": "SessionWatcher",
       "href": "https://sessionwatcher.com?ref=ui.starck.studio",
       "iconSrc": "/products/sessionwatcher.png",
-      "evidence": "session-watcher-website/components/companion/shared.tsx"
+      "evidence": "session-watcher-website/components/HomeHeader.tsx"
     },
     {
       "name": "Moorline",
@@ -95,7 +95,7 @@ const componentProvenance = {
       "name": "SessionWatcher",
       "href": "https://sessionwatcher.com?ref=ui.starck.studio",
       "iconSrc": "/products/sessionwatcher.png",
-      "evidence": "session-watcher-website/components/Testimonials.tsx"
+      "evidence": "session-watcher-website/components/FounderNote.tsx"
     }
   ],
   "whats-new-card": [

@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./public/starck-ui-mark.svg" alt="STARCK UI" width="72" height="72" />
+  <img src="./public/starck-ui-icon.png" alt="STARCK UI" width="72" height="72" />
 </p>
 
 <h1 align="center">STARCK UI</h1>
